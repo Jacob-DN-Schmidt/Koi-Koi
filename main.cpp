@@ -34,7 +34,6 @@ int main(void) {
 	display.initiateWindow();
 	cout << display.promptCallKoi(test) << "\n";*/
 	unsigned int seed = 1740029637;// UINT_MAX& time(nullptr);
-	try {
 		std::ofstream seedFile;
 		seedFile.open("seed.txt", std::ios::app);
 		if (!seedFile.is_open()) return 1;
@@ -43,14 +42,6 @@ int main(void) {
 		seedFile.close();
 		KoiKoi_Game game;
 		game.startGame();
-	}
-	catch (const std::exception& e) {
-		std::ofstream dump;
-		dump.open("dump_" + to_string(seed) + ".txt");
-		dump << e.what();
-		dump.close();
-		return 2;
-	}
 
 	// Main game loop
 

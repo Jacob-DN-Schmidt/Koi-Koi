@@ -148,7 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="CardInfo.txt" />
-    <Text Include="seed.txt" />
+    <Text Include="seed_log.txt" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="backCard.png" />

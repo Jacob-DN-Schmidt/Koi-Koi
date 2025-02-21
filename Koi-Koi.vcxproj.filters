@@ -64,7 +64,7 @@
     <Text Include="CardInfo.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="seed.txt">
+    <Text Include="seed_log.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
