@@ -67,14 +67,14 @@ private:
 		UnloadTexture(highlight_);
 	};
 
-	Texture2D blank_;
+	Texture2D back_;
 
-	void loadBlank() {
-		blank_ = LoadTexture("blankCard.png");
+	void loadBack() {
+		back_ = LoadTexture("backCard.png");
 	};
 
-	void unloadBlank() const {
-		UnloadTexture(blank_);
+	void unloadBack() const {
+		UnloadTexture(back_);
 	};
 
 	class Hanafuda_Card_Texture {
@@ -242,7 +242,7 @@ public:
 		playerPts_(0),
 		oppPts_(0),
 		highlight_(),
-		blank_(),
+		back_(),
 		yesBoxX_(0),
 		yesBoxY_(0),
 		noBoxX_(0),
@@ -300,7 +300,7 @@ public:
 		noBoxY_ = yesBoxY_;
 
 		loadHighlight();
-		loadBlank();
+		loadBack();
 
 		cout << "width: " << screenWidth << " hight: " << screenHeight << " pbw: " << handBoxWidth << " pbh: " << playBoxHeight << " ps: " << paddingSide << " pt: " << paddingTop << "\n";
 	};
@@ -308,7 +308,7 @@ public:
 	void closeWindow() {
 		clearTextures();
 		unloadHighlight();
-		unloadBlank();
+		unloadBack();
 		CloseWindow();
 	}
 
@@ -393,7 +393,7 @@ public:
 			}
 
 			for (int i = 0; i < blanksToDraw; i++) {
-				DrawTexture(blank_, (int) currentDisplacement, (int) opponentHandBoxY, WHITE);
+				DrawTexture(back_, (int) currentDisplacement, (int) opponentHandBoxY, WHITE);
 				currentDisplacement += dx;
 			}
 		}

@@ -151,7 +151,7 @@
     <Text Include="seed.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="blankCard.png" />
+    <Image Include="backCard.png" />
     <Image Include="g_pixel.png" />
     <Image Include="Hanafuda Cards\img_01.png" />
     <Image Include="Hanafuda Cards\img_02.png" />
