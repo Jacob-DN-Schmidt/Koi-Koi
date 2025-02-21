@@ -14,7 +14,7 @@
 
 void Hanafuda_Deck::initializeFromFile() {
 	fstream CardInfo;
-	CardInfo.open("CardInfo.txt");
+	CardInfo.open("Hanafuda Cards/CardInfo.txt");
 	regex parseMultKasu("^/(\\d+);(\\d+)$", regex::ECMAScript);
 	string name;
 	int month;
@@ -40,7 +40,7 @@ void Hanafuda_Deck::initializeFromFile() {
 		}
 	}
 	else {
-		throw new exception("failed to open 'Special_Card.txt'");
+		throw new exception("failed to open 'CardInfo.txt'");
 	}
 }
 

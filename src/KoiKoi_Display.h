@@ -9,7 +9,6 @@
 #include <boost/algorithm/string/constants.hpp>
 #include <cstdlib>
 #include <deque>
-#include <exception>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -60,7 +59,7 @@ private:
 	Texture2D highlight_;
 
 	void loadHighlight() {
-		highlight_ = LoadTexture("highlight.png");
+		highlight_ = LoadTexture("Hanafuda Cards/highlight.png");
 	};
 
 	void unloadHighlight() const {
@@ -70,7 +69,7 @@ private:
 	Texture2D back_;
 
 	void loadBack() {
-		back_ = LoadTexture("backCard.png");
+		back_ = LoadTexture("Hanafuda Cards/backCard.png");
 	};
 
 	void unloadBack() const {
@@ -737,44 +736,7 @@ public:
 		//------------------------------------------------------------------------------------------------------
 		// opp played load textures
 		//------------------------------------------------------------------------------------------------------
-
 		parsePlayed(collections[1], opponentPlayBoxX, opponentPlayBoxY, opponentPlayed_);
-
-		//if (!temp.empty()) {
-		//	boost::split(imgNames, temp, boost::is_any_of(","), boost::algorithm::token_compress_mode_type::token_compress_on);
-
-		//	float currentDisplacement = opponentPlayBoxX;
-		//	bool hadJunk = false;
-
-		//	while (imgNames.size() != 0 && imgNames.front().front() == 'J') {
-		//		textures_.push_back(Hanafuda_Card_Texture(imgNames.front().substr(1, imgNames.front().size()), currentDisplacement, opponentPlayBoxY));
-		//		currentDisplacement += 15;
-		//		imgNames.pop_front();
-		//		hadJunk = true;
-		//	}
-
-		//	if (imgNames.size() != 0) {
-		//		if (hadJunk) {
-		//			currentDisplacement -= 15;
-		//			currentDisplacement += cwidth + (paddingSide * 2);
-		//		}
-
-		//		if (imgNames.size() - 1 != 0) {
-		//			float dx = (playBoxWidth - currentDisplacement + opponentPlayBoxX) / (imgNames.size() - 1);
-
-		//			if (dx > (cwidth + (paddingSide * 2))) {
-		//				dx = cwidth + (paddingSide * 2);
-		//			}
-
-		//			for (int i = 0; i < imgNames.size() - 1; i++) {
-		//				textures_.push_back(Hanafuda_Card_Texture(imgNames[i], currentDisplacement, opponentPlayBoxY));
-		//				currentDisplacement += dx;
-		//			}
-		//		}
-		//		textures_.push_back(Hanafuda_Card_Texture(imgNames.back(), currentDisplacement, opponentPlayBoxY));
-		//		imgNames.clear();
-		//	}
-		//}
 		//==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==
 
 
@@ -789,57 +751,6 @@ public:
 		// player played load textures
 		//------------------------------------------------------------------------------------------------------
 		parsePlayed(collections[3], playerPlayBoxX, playerPlayBoxY, playerPlayed_);
-
-		//if (!temp.empty()) {
-		//	boost::split(imgNames, temp, boost::is_any_of(","), boost::algorithm::token_compress_mode_type::token_compress_on);
-		//	float currentDisplacement = playerPlayBoxX;
-		//	float dx = (playBoxWidth / imgNames.size());
-		//	bool hadJunk = false;
-
-		//	if (dx > cwidth + (paddingSide * 2)) {
-		//		dx = cwidth + (paddingSide * 2);
-		//	}
-
-		//	while (imgNames.size() != 0 && imgNames.front().front() == 'J') {
-		//		textures_.push_back(Hanafuda_Card_Texture(imgNames.front().substr(1, imgNames.front().size()), currentDisplacement, playerPlayBoxY));
-		//		currentDisplacement += 15;
-		//		imgNames.pop_front();
-		//		hadJunk = true;
-		//	}
-
-		//	if (imgNames.size() != 0) {
-		//		if (imgNames.size() - 1 != 0) {
-		//			if (hadJunk) {
-		//				currentDisplacement -= 15;
-		//				currentDisplacement += cwidth + (paddingSide * 2);
-		//			}
-		//			float dx = ((playBoxWidth - currentDisplacement + playerPlayBoxX) / (imgNames.size() - 1));
-
-		//			if (dx > cwidth + (paddingSide * 2)) {
-		//				dx = cwidth + (paddingSide * 2);
-		//			}
-
-		//			for (int i = 0; i < imgNames.size(); i++) {
-		//				textures_.push_back(Hanafuda_Card_Texture(imgNames[i], currentDisplacement, playerPlayBoxY));
-		//				currentDisplacement += dx;
-		//			}
-		//		}
-		//		textures_.push_back(Hanafuda_Card_Texture(imgNames.back(), currentDisplacement, playerPlayBoxY));
-		//		imgNames.clear();
-		//	}
-		//	/*for (int i = 0; i < imgNames.size(); i++) {
-		//		if (imgNames[i].front() == 'J') {
-		//			textures_.push_back(Hanafuda_Card_Texture(imgNames[i].substr(1, imgNames[i].size()), currentDisplacement, playerPlayBoxY));
-		//			currentDisplacement += 5;
-		//			dx -= (int) (5 / imgNames.size());
-		//		}
-		//		else {
-		//			currentDisplacement += dx;
-		//			textures_.push_back(Hanafuda_Card_Texture(imgNames[i], currentDisplacement, playerPlayBoxY));
-		//		}
-		//	}
-		//	imgNames.clear();*/
-		//}
 		//==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==
 
 
@@ -850,7 +761,7 @@ public:
 		//==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==
 
 
-		//-------------------------------------------------------------------------------------------------------------------------------------------------
+		//------------------------------------------------------------------------------------------------------
 		// Opponent load points
 		//------------------------------------------------------------------------------------------------------
 		//cout << "Opp pts: " << temp << "\n";
@@ -861,7 +772,6 @@ public:
 		//------------------------------------------------------------------------------------------------------
 		// Player load points
 		//------------------------------------------------------------------------------------------------------
-		//cout << "Player pts: " << temp << "\n";
 		playerPts_ = stoi(collections[6]);
 		//==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==  ==
 
