@@ -1,0 +1,36 @@
+/2;0
+;0;2
+Crane and Sun;0;5
+/2;1
+;1;2
+Warbling White-eye;1;4
+/2;2
+;2;2
+Curtain;2;5
+/2;3
+;3;1
+Cuckoo;3;4
+/2;4
+;4;1
+Eight-plank Bridge;4;4
+/2;5
+;5;3
+Butterfly;5;4
+/2;6
+;6;1
+Boar;6;4
+/2;7
+Geese;7;4
+Full Moon;7;5
+/2;8
+;8;3
+Sake Cup;8;4
+/2;9
+;9;3
+Deer;9;4
+Lighting;10;0
+;10;1
+Swallow;10;4
+Ono no Michikaze;10;5
+/3;11
+Chinese Phoenix;11;5

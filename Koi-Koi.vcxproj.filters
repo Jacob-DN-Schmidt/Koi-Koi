@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resource Files\Hanafuda Cards">
+      <UniqueIdentifier>{ffc8b9f4-c5a3-461e-943f-9b14646e4bbf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Hanafuda_Card.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hanafuda_Deck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KoiKoi_Game_Handler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KoiKoi_Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Hanafuda_Deck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hanafuda_Card.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KoiKoi_Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KoiKoi_Game_Handler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KoiKoi_Display.cpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KoiKoi_Display.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CardInfo.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="seed.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Hanafuda Cards\img_01.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_02.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_03.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_04.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_05.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_06.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_07.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_08.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_09.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_10.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_11.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_12.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_13.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_14.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_15.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_16.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_17.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_18.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_19.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_20.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_21.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_22.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_23.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_24.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_25.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_26.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_27.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_28.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_29.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_30.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_31.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_32.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_33.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_34.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_35.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_36.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_37.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_38.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_39.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_40.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_41.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_42.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_43.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_44.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_45.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_46.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_47.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="Hanafuda Cards\img_48.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Image>
+    <Image Include="g_pixel.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="highlight.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="blankCard.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+  </ItemGroup>
+</Project>

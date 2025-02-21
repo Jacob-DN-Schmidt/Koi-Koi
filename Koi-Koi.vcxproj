@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{d17e3201-ab6d-4819-bc5d-68be2ed468c6}</ProjectGuid>
+    <RootNamespace>KoiKoi</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Program Files\Microsoft Visual Studio\2022\Community\vcpkg\installed\x64-windows;C:\\Users\\SchmidtJacob\\source\\libs\\boost\\boost_1_87_0</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalOptions>/LIBPATH:C:\\Users\\SchmidtJacob\\source\\libs\\boost\\boost_1_87_0\\stage\\lib %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalLibraryDirectories>C:\Program Files\Microsoft Visual Studio\2022\Community\vcpkg\installed\x64-windows\lib;C:\Users\SchmidtJacob\source\libs\boost\boost_1_87_0\stage;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Hanafuda_Deck.h" />
+    <ClInclude Include="Hanafuda_Card.h" />
+    <ClInclude Include="KoiKoi_Display.h" />
+    <ClInclude Include="KoiKoi_Game.h" />
+    <ClInclude Include="KoiKoi_Game_Handler.h" />
+    <ClInclude Include="KoiKoi_Display.cpp" />
+    <ClInclude Include="Player.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Hanafuda_Card.cpp" />
+    <ClCompile Include="Hanafuda_Deck.cpp" />
+    <ClCompile Include="KoiKoi_Game.cpp" />
+    <ClCompile Include="KoiKoi_Game_Handler.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CardInfo.txt" />
+    <Text Include="seed.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="blankCard.png" />
+    <Image Include="g_pixel.png" />
+    <Image Include="Hanafuda Cards\img_01.png" />
+    <Image Include="Hanafuda Cards\img_02.png" />
+    <Image Include="Hanafuda Cards\img_03.png" />
+    <Image Include="Hanafuda Cards\img_04.png" />
+    <Image Include="Hanafuda Cards\img_05.png" />
+    <Image Include="Hanafuda Cards\img_06.png" />
+    <Image Include="Hanafuda Cards\img_07.png" />
+    <Image Include="Hanafuda Cards\img_08.png" />
+    <Image Include="Hanafuda Cards\img_09.png" />
+    <Image Include="Hanafuda Cards\img_10.png" />
+    <Image Include="Hanafuda Cards\img_11.png" />
+    <Image Include="Hanafuda Cards\img_12.png" />
+    <Image Include="Hanafuda Cards\img_13.png" />
+    <Image Include="Hanafuda Cards\img_14.png" />
+    <Image Include="Hanafuda Cards\img_15.png" />
+    <Image Include="Hanafuda Cards\img_16.png" />
+    <Image Include="Hanafuda Cards\img_17.png" />
+    <Image Include="Hanafuda Cards\img_18.png" />
+    <Image Include="Hanafuda Cards\img_19.png" />
+    <Image Include="Hanafuda Cards\img_20.png" />
+    <Image Include="Hanafuda Cards\img_21.png" />
+    <Image Include="Hanafuda Cards\img_22.png" />
+    <Image Include="Hanafuda Cards\img_23.png" />
+    <Image Include="Hanafuda Cards\img_24.png" />
+    <Image Include="Hanafuda Cards\img_25.png" />
+    <Image Include="Hanafuda Cards\img_26.png" />
+    <Image Include="Hanafuda Cards\img_27.png" />
+    <Image Include="Hanafuda Cards\img_28.png" />
+    <Image Include="Hanafuda Cards\img_29.png" />
+    <Image Include="Hanafuda Cards\img_30.png" />
+    <Image Include="Hanafuda Cards\img_31.png" />
+    <Image Include="Hanafuda Cards\img_32.png" />
+    <Image Include="Hanafuda Cards\img_33.png" />
+    <Image Include="Hanafuda Cards\img_34.png" />
+    <Image Include="Hanafuda Cards\img_35.png" />
+    <Image Include="Hanafuda Cards\img_36.png" />
+    <Image Include="Hanafuda Cards\img_37.png" />
+    <Image Include="Hanafuda Cards\img_38.png" />
+    <Image Include="Hanafuda Cards\img_39.png" />
+    <Image Include="Hanafuda Cards\img_40.png" />
+    <Image Include="Hanafuda Cards\img_41.png" />
+    <Image Include="Hanafuda Cards\img_42.png" />
+    <Image Include="Hanafuda Cards\img_43.png" />
+    <Image Include="Hanafuda Cards\img_44.png" />
+    <Image Include="Hanafuda Cards\img_45.png" />
+    <Image Include="Hanafuda Cards\img_46.png" />
+    <Image Include="Hanafuda Cards\img_47.png" />
+    <Image Include="Hanafuda Cards\img_48.png" />
+    <Image Include="highlight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
