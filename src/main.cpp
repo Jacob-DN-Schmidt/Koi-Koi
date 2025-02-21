@@ -1,41 +1,16 @@
-/*******************************************************************************************
-*
-*   raylib [textures] example - Texture loading and drawing
-*
-*   Example complexity rating: 1/4
-*
-*   Example originally created with raylib 1.0, last time updated with raylib 1.0
-*
-*   Example licensed under an unmodified zlib/libpng license, which is an OSI-certified,
-*   BSD-like license that allows static linking with closed source software
-*
-*   Copyright (c) 2014-2025 Ramon Santamaria (@raysan5)
-*
-********************************************************************************************/
-
 #include "KoiKoi_Game.h"
-#include <climits>
-#include <exception>
 #include <fstream>
 #include <iosfwd>
 #include <iostream>
-#include <stdlib.h>
-#include <time.h>
+#include <cstdlib>
 
 //------------------------------------------------------------------------------------
 // Program main entry point
 //------------------------------------------------------------------------------------
 int main(void) {
-	// Initialization
-	//--------------------------------------------------------------------------------------
-	//---------------------------------------------------------------------------------------
-	/*string test = "";
-	KoiKoi_Display display;
-	display.initiateWindow();
-	cout << display.promptCallKoi(test) << "\n";*/
 	unsigned int seed = 1740029637;// UINT_MAX& time(nullptr);
 		std::ofstream seedFile;
-		seedFile.open("seed.txt", std::ios::app);
+		seedFile.open("bin/seed.txt", std::ios::app);
 		if (!seedFile.is_open()) return 1;
 		srand(seed);
 		seedFile << seed << "\n";
@@ -43,15 +18,9 @@ int main(void) {
 		KoiKoi_Game game;
 		game.startGame();
 
-	// Main game loop
-
-	// De-Initialization
-	//--------------------------------------------------------------------------------------
-	//display.closeWindow(); // Close window and OpenGL context
-	//--------------------------------------------------------------------------------------
-
 	return 0;
 }
+
 //
 //#include "KoiKoi_Game.h"
 //#include <cstdlib>

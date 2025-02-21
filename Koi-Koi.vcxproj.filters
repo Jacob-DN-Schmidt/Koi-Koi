@@ -18,45 +18,45 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Hanafuda_Card.cpp">
+    <ClCompile Include="src\Hanafuda_Card.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Hanafuda_Deck.cpp">
+    <ClCompile Include="src\Hanafuda_Deck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="src\KoiKoi_Display.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="src\KoiKoi_Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="KoiKoi_Game_Handler.cpp">
+    <ClCompile Include="src\KoiKoi_Game_Handler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="KoiKoi_Game.cpp">
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Hanafuda_Deck.h">
+    <ClInclude Include="src\Hanafuda_Card.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Hanafuda_Card.h">
+    <ClInclude Include="src\Hanafuda_Deck.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="KoiKoi_Game.h">
+    <ClInclude Include="src\KoiKoi_Display.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="src\KoiKoi_Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="KoiKoi_Game_Handler.h">
+    <ClInclude Include="src\KoiKoi_Game_Handler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="KoiKoi_Display.cpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="KoiKoi_Display.h">
+    <ClInclude Include="src\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -64,7 +64,7 @@
     <Text Include="CardInfo.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="seed_log.txt">
+    <Text Include="bin\seed_log.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

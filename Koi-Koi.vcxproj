@@ -130,25 +130,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Hanafuda_Deck.h" />
-    <ClInclude Include="Hanafuda_Card.h" />
-    <ClInclude Include="KoiKoi_Display.h" />
-    <ClInclude Include="KoiKoi_Game.h" />
-    <ClInclude Include="KoiKoi_Game_Handler.h" />
-    <ClInclude Include="KoiKoi_Display.cpp" />
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="src\Hanafuda_Card.h" />
+    <ClInclude Include="src\Hanafuda_Deck.h" />
+    <ClInclude Include="src\KoiKoi_Display.h" />
+    <ClInclude Include="src\KoiKoi_Game.h" />
+    <ClInclude Include="src\KoiKoi_Game_Handler.h" />
+    <ClInclude Include="src\Player.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Hanafuda_Card.cpp" />
-    <ClCompile Include="Hanafuda_Deck.cpp" />
-    <ClCompile Include="KoiKoi_Game.cpp" />
-    <ClCompile Include="KoiKoi_Game_Handler.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="src\Hanafuda_Card.cpp" />
+    <ClCompile Include="src\Hanafuda_Deck.cpp" />
+    <ClCompile Include="src\KoiKoi_Display.cpp" />
+    <ClCompile Include="src\KoiKoi_Game.cpp" />
+    <ClCompile Include="src\KoiKoi_Game_Handler.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="bin\seed_log.txt" />
     <Text Include="CardInfo.txt" />
-    <Text Include="seed_log.txt" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="backCard.png" />
