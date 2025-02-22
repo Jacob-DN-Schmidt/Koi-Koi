@@ -1,4 +1,4 @@
-This is a personal project of mine with the goal to eventually implement an AI opponent that you can play Koi-Koi against. 
+This is a personal project of mine with the goal to eventually implement an AI opponent that you can play Koi-Koi against. Currently, I am working on finishing up the gui elements, cleaning up some of the code, and reformatting files. The next steps for this project would be to decide what form of AI I would like to use and implementing an interface between the game logic and AI
 
 Makes use of [boost](https://www.boost.org/) and [raylib](https://github.com/raysan5/raylib) libraries for convienience methods and graphics respectively.
 
