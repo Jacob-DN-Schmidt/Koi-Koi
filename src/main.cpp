@@ -1,22 +1,25 @@
 #include "KoiKoi_Game.h"
+#include <climits>
 #include <fstream>
 #include <iosfwd>
 #include <iostream>
-#include <cstdlib>
+#include <stdlib.h>
+#include <time.h>
 
 //------------------------------------------------------------------------------------
 // Program main entry point
 //------------------------------------------------------------------------------------
 int main(void) {
-	unsigned int seed = 1740029637;// UINT_MAX& time(nullptr);
-		std::ofstream seedFile;
-		seedFile.open("bin/seed.txt", std::ios::app);
-		if (!seedFile.is_open()) return 1;
-		srand(seed);
+	unsigned int seed = UINT_MAX & time(nullptr);// UINT_MAX& time(nullptr);
+	std::ofstream seedFile;
+	seedFile.open("bin/seed_log.txt", std::ios::app);
+	if (seedFile.is_open()) {
 		seedFile << seed << "\n";
 		seedFile.close();
-		KoiKoi_Game game;
-		game.startGame();
+	}
+	srand(seed);
+	KoiKoi_Game game;
+	game.startGame();
 
 	return 0;
 }
