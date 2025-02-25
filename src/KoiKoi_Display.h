@@ -153,8 +153,7 @@ public:
 	int playerPts_ = 0;
 	int oppPts_ = 0;
 
-	KoiKoi_Display() {
-	};
+	KoiKoi_Display() {};
 
 	~KoiKoi_Display() {
 		this->closeWindow();
