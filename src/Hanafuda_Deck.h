@@ -14,11 +14,6 @@ private:
 
 public:
 	Hanafuda_Deck();
-	/*Hanafuda_Deck(const Hanafuda_Deck& deck) :deck_() {
-		for (auto itr = deck.deck_.cbegin(); itr != deck.deck_.cend(); itr++) {
-			this->deck_.push_back(new Hanafuda_Card(*itr));
-		};
-	};*/
 	~Hanafuda_Deck();
 	void shuffle();
 	Hanafuda_Card* dealCard();

@@ -16,26 +16,22 @@ void Hanafuda_Deck::initializeFromFile() {
 	fstream CardInfo;
 	CardInfo.open("Hanafuda Cards/CardInfo.txt");
 	regex parseMultKasu("^/(\\d+);(\\d+)$", regex::ECMAScript);
-	string name;
-	int month;
-	int reps;
-	int idSuffix = 1;
 	string current;
+
 	if (CardInfo.is_open()) {
 		while (getline(CardInfo, current)) {
 			if (current.at(0) == '/') {
-				//cout << "mult\n";
-				reps = stoi(regex_replace(current, parseMultKasu, "$1"));
-				month = stoi(regex_replace(current, parseMultKasu, "$2"));
+				int reps = stoi(regex_replace(current, parseMultKasu, "$1"));
+				int month = stoi(regex_replace(current, parseMultKasu, "$2"));
+				int idSuffix = 0;
+
 				for (int i = 0; i < reps; i++) {
-					this->deck_.push_back(new Hanafuda_Card(month, 0, "", "img_" + boost::str(boost::format("%02d") % idSuffix)));
+					this->deck_.push_back(new Hanafuda_Card(month, 0, "", idSuffix));
 					idSuffix++;
 				}
 			}
 			else {
-				//cout << "special\n";
-				this->deck_.push_back(new Hanafuda_Card(current, idSuffix));
-				idSuffix++;
+				this->deck_.push_back(new Hanafuda_Card(current));
 			}
 		}
 	}
