@@ -3,7 +3,7 @@
 
 #include "boost/algorithm/string/classification.hpp"
 #include "boost/algorithm/string/split.hpp"
-#include "boost/serialization/strong_typedef.hpp"
+#include "KoiKoi.h"
 #include "raylib.h"
 #include <array>
 #include <boost/algorithm/string/constants.hpp>
@@ -15,45 +15,18 @@
 
 using namespace::std;
 using namespace::boost;
+using namespace::KoiKoi;
 
-BOOST_STRONG_TYPEDEF(float, FloatEnum)
-constexpr float cwidth = 146.0f;
-constexpr float cheight = 240.0f;
+extern Texture2D highlight_;
+extern void loadHighlight();
+extern void unloadHighlight();
 
-constexpr float ywidth = 79.8f;
-
-constexpr float nwidth = 54.6f;
-
-constexpr float swidth = 42.0f;
-
-constexpr float ckwidth = 189.0f;
-
-constexpr float theight = 30.0f;
-
-constexpr float appearenceoffsetX = 4.0f;
-constexpr float appearenceoffsetY = 6.0f;
+extern Texture2D back_;
+extern void loadBack();
+extern void unloadBack();
 
 class KoiKoi_Display {
 private:
-	Texture2D highlight_;
-
-	void loadHighlight() {
-		highlight_ = LoadTexture("Hanafuda Cards/highlight.png");
-	};
-
-	void unloadHighlight() const {
-		UnloadTexture(highlight_);
-	};
-
-	Texture2D back_;
-
-	void loadBack() {
-		back_ = LoadTexture("Hanafuda Cards/backCard.png");
-	};
-
-	void unloadBack() const {
-		UnloadTexture(back_);
-	};
 
 	class Hanafuda_Card_Texture {
 	public:
@@ -117,18 +90,24 @@ private:
 		};
 	};
 
-	bool canSelect_;
-	bool mousePress_;
 
-	bool callKoi_;
-	bool callKoiChoice_;
+	bool canSelect_ = false;
+	bool mousePress_ = false;
 
-	int handSelection_;
-	int tableSelection_;
+	bool callKoi_ = false;
+	bool callKoiChoice_ = false;
 
-	string gamestate_;
+	bool tableSelect_ = false;
+	string cardToMatch_ = "";
+	string message_ = "";
 
-	//vector<Hanafuda_Card_Texture> textures_;
+	int handSelection_ = -1;
+	int tableSelection_ = -1;
+
+	string gamestate_ = "";
+
+	int blanksToDraw = 0;
+
 	vector<Hanafuda_Card_Texture> opponentPlayed_;
 	vector<Hanafuda_Card_Texture> playerPlayed_;
 
@@ -136,88 +115,45 @@ private:
 	vector<Hanafuda_Card_Selectable_Texture> playerHandSelectable_;
 	vector<Hanafuda_Card_Selectable_Texture> tableSelectable_;
 
-	int blanksToDraw;
-
 public:
-	float screenWidth;
-	float screenHeight;
+	float screenWidth = 100;
+	float screenHeight = 100;
 
-	float paddingSide;
-	float paddingTop;
+	float paddingSide = 0;
+	float paddingTop = 0;
 
-	float handBoxWidth;
-	float playBoxWidth;
-	float playBoxHeight;
+	float handBoxWidth = 0;
+	float playBoxWidth = 0;
+	float playBoxHeight = 0;
 
-	float opponentHandBoxX;
-	float opponentHandBoxY;
+	float opponentHandBoxX = 0;
+	float opponentHandBoxY = 0;
 
-	float opponentPlayBoxX;
-	float opponentPlayBoxY;
+	float opponentPlayBoxX = 0;
+	float opponentPlayBoxY = 0;
 
-	float playerHandBoxX;
-	float playerHandBoxY;
+	float playerHandBoxX = 0;
+	float playerHandBoxY = 0;
 
-	float playerPlayBoxX;
-	float playerPlayBoxY;
+	float playerPlayBoxX = 0;
+	float playerPlayBoxY = 0;
 
-	float tableBoxWidth;
-	float tableBoxHeight;
+	float tableBoxWidth = 0;
+	float tableBoxHeight = 0;
 
-	float tableBoxX;
-	float tableBoxY;
+	float tableBoxX = 0;
+	float tableBoxY = 0;
 
-	int playerPts_;
-	int oppPts_;
+	float yesBoxX_ = 0;
+	float yesBoxY_ = 0;
 
-	float yesBoxX_;
-	float yesBoxY_;
+	float noBoxX_ = 0;
+	float noBoxY_ = 0;
 
-	float noBoxX_;
-	float noBoxY_;
+	int playerPts_ = 0;
+	int oppPts_ = 0;
 
-	bool tableSelect_;
-	string cardToMatch_;
-	string message_;
-
-	KoiKoi_Display() : gamestate_(""),
-		canSelect_(false),
-		mousePress_(false),
-		callKoi_(false),
-		callKoiChoice_(false),
-		handSelection_(-1),
-		tableSelection_(-1),
-		blanksToDraw(0),
-		screenWidth(100),
-		screenHeight(100),
-		paddingSide(0),
-		paddingTop(0),
-		handBoxWidth(0),
-		playBoxWidth(0),
-		playBoxHeight(0),
-		opponentHandBoxX(0),
-		opponentHandBoxY(0),
-		opponentPlayBoxX(0),
-		opponentPlayBoxY(0),
-		playerHandBoxX(0),
-		playerHandBoxY(0),
-		playerPlayBoxX(0),
-		playerPlayBoxY(0),
-		tableBoxWidth(0),
-		tableBoxHeight(0),
-		tableBoxX(0),
-		tableBoxY(0),
-		playerPts_(0),
-		oppPts_(0),
-		highlight_(),
-		back_(),
-		yesBoxX_(0),
-		yesBoxY_(0),
-		noBoxX_(0),
-		noBoxY_(0),
-		tableSelect_(false),
-		cardToMatch_(""),
-		message_("") {
+	KoiKoi_Display() {
 	};
 
 	~KoiKoi_Display() {
