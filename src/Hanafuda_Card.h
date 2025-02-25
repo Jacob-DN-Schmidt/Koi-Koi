@@ -21,6 +21,9 @@ private:
 	int suit_;
 	string name_;
 	string imgID_;
+
+	void setImgID(int idSuffix);
+
 public:
 	static const array<string, 12> monthArr;
 	static const array<string, 6> suitArr;
@@ -32,14 +35,16 @@ public:
 		}
 	};
 
-	Hanafuda_Card(int setMonth = 0, int setSuit = 0, string setName = "", string setImgID = "") :month_(setMonth), suit_(setSuit), name_(setName), imgID_(setImgID) {};
+	Hanafuda_Card(int setMonth = 0, int setSuit = 0, string setName = "", int idSuffix = -1) :month_(setMonth), suit_(setSuit), name_(setName), imgID_() { this->setImgID(idSuffix); };
 	//Hanafuda_Card(const Hanafuda_Card& card) :month_(card.month_), suit_(card.suit_), name_(card.name_), imgID_(card.imgID_) {};
 	//Hanafuda_Card(const Hanafuda_Card* card) :month_(card->month_), suit_(card->suit_), name_(card->name_), imgID_(card->imgID_) {};
-	Hanafuda_Card(string card, int idSuffix = 0);
+	Hanafuda_Card(string card, int idSuffix = -1);
+
 	int getMonth() const { return this->month_; };
 	int getSuit() const { return this->suit_; };
 	string getName() const { return this->name_; };
 	string getImgID() const { return this->imgID_; };
+
 	// bool equal(int month, int suit) const { return this->month_ == month && this->suit_ == suit; };
 	bool match(const Hanafuda_Card* rhs) const { return this->month_ == rhs->month_; };
 	static void insert(Hanafuda_Card* card, deque<Hanafuda_Card*>& into);
@@ -50,9 +55,11 @@ public:
 		}
 		return Hanafuda_Card::monthArr[this->month_] + " " + this->name_;
 	};
+
 	friend ostream& operator<<(ostream& os, const Hanafuda_Card& card) {
 		return os << card.toFormattedString();
 	};
+
 	friend ostream& operator<<(ostream& os, const Hanafuda_Card* card) {
 		return os << card->toFormattedString();
 	};
