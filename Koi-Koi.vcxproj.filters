@@ -61,166 +61,163 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="CardInfo.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
     <Text Include="bin\seed_log.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Hanafuda Cards\CardInfo.txt">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Hanafuda Cards\img_01.png">
+    <Image Include="Hanafuda Cards\M0_S0_A.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_02.png">
+    <Image Include="Hanafuda Cards\M0_S0_B.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_03.png">
+    <Image Include="Hanafuda Cards\M0_S2.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_04.png">
+    <Image Include="Hanafuda Cards\crane_and_sun.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_05.png">
+    <Image Include="Hanafuda Cards\M1_S0_A.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_06.png">
+    <Image Include="Hanafuda Cards\M1_S0_B.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_07.png">
+    <Image Include="Hanafuda Cards\M1_S2.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_08.png">
+    <Image Include="Hanafuda Cards\warbling_white-eye.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_09.png">
+    <Image Include="Hanafuda Cards\M2_S0_A.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_10.png">
+    <Image Include="Hanafuda Cards\M2_S0_B.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_11.png">
+    <Image Include="Hanafuda Cards\M2_S2.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_12.png">
+    <Image Include="Hanafuda Cards\curtain.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_13.png">
+    <Image Include="Hanafuda Cards\M3_S0_A.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_14.png">
+    <Image Include="Hanafuda Cards\M3_S0_B.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_15.png">
+    <Image Include="Hanafuda Cards\M3_S1.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_16.png">
+    <Image Include="Hanafuda Cards\cuckoo.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_17.png">
+    <Image Include="Hanafuda Cards\M4_S0_A.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_18.png">
+    <Image Include="Hanafuda Cards\M4_S0_B.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_19.png">
+    <Image Include="Hanafuda Cards\M4_S1.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_20.png">
+    <Image Include="Hanafuda Cards\eight-plank_bridge.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_21.png">
+    <Image Include="Hanafuda Cards\M5_S0_A.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_22.png">
+    <Image Include="Hanafuda Cards\M5_S0_B.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_23.png">
+    <Image Include="Hanafuda Cards\M5_S3.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_24.png">
+    <Image Include="Hanafuda Cards\butterfly.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_25.png">
+    <Image Include="Hanafuda Cards\M6_S0_A.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_26.png">
+    <Image Include="Hanafuda Cards\M6_S0_B.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_27.png">
+    <Image Include="Hanafuda Cards\M6_S1.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_28.png">
+    <Image Include="Hanafuda Cards\boar.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_29.png">
+    <Image Include="Hanafuda Cards\M7_S0_A.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_30.png">
+    <Image Include="Hanafuda Cards\M7_S0_B.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_31.png">
+    <Image Include="Hanafuda Cards\geese.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_32.png">
+    <Image Include="Hanafuda Cards\full_moon.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_33.png">
+    <Image Include="Hanafuda Cards\M8_S0_A.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_34.png">
+    <Image Include="Hanafuda Cards\M8_S0_B.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_35.png">
+    <Image Include="Hanafuda Cards\M8_S3.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_36.png">
+    <Image Include="Hanafuda Cards\sake_cup.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_37.png">
+    <Image Include="Hanafuda Cards\M9_S0_A.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_38.png">
+    <Image Include="Hanafuda Cards\M9_S0_B.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_39.png">
+    <Image Include="Hanafuda Cards\M9_S3.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_40.png">
+    <Image Include="Hanafuda Cards\deer.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_41.png">
+    <Image Include="Hanafuda Cards\lighting.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_42.png">
+    <Image Include="Hanafuda Cards\M10_S1.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_43.png">
+    <Image Include="Hanafuda Cards\swallow.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_44.png">
+    <Image Include="Hanafuda Cards\ono_no_michikaze.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_45.png">
+    <Image Include="Hanafuda Cards\M11_S0_A.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_46.png">
+    <Image Include="Hanafuda Cards\M11_S0_B.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_47.png">
+    <Image Include="Hanafuda Cards\M11_S0_C.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="Hanafuda Cards\img_48.png">
+    <Image Include="Hanafuda Cards\chinese_phoenix.png">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="g_pixel.png">
-      <Filter>Resource Files</Filter>
+    <Image Include="Hanafuda Cards\backCard.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
-    <Image Include="highlight.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="backCard.png">
-      <Filter>Resource Files</Filter>
+    <Image Include="Hanafuda Cards\highlight.png">
+      <Filter>Resource Files\Hanafuda Cards</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
