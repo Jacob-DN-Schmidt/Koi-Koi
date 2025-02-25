@@ -69,6 +69,7 @@ void KoiKoi_Game::startRound() {
 			}
 		}
 	}
+	display_.pause(this->gamestate());
 	if (end) return;
 
 
