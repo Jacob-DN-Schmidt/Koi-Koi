@@ -33,27 +33,6 @@ constexpr float theight = 30.0f;
 constexpr float appearenceoffsetX = 4.0f;
 constexpr float appearenceoffsetY = 6.0f;
 
-//float SomeFunction(FloatingPointEnum value) {
-//	float new_value;
-//	/* perform some operation using "value" to calculate "new_value" */
-//	new_value = static_cast<float>(value); // <- a simplistic example
-//	return new_value;
-//}
-
-//54.6
-//79.8
-//42
-//189
-
-//enum display_elements {
-//	cwidth = 146, cheight = 240,
-//	ywidth = 75, theight = 30,
-//	nwidth = 50, theight = 30,
-//	swidth = 46,
-//	ckwidth = 183, theight = 30,
-//	appearenceoffset = 4
-//};
-
 class KoiKoi_Display {
 private:
 	Texture2D highlight_;
@@ -82,11 +61,8 @@ private:
 		float x_;
 		float y_;
 		Texture2D texture_;
-		//bool select_;
 
-		//Texture2D highlight_;
-
-		Hanafuda_Card_Texture(string imgID, float x, float y) : imgID_("Hanafuda Cards/" + imgID + ".png"), x_(x), y_(y), texture_()/*, select_(false)*/ {};
+		Hanafuda_Card_Texture(string imgID, float x, float y) : imgID_("Hanafuda Cards/" + imgID + ".png"), x_(x), y_(y), texture_() {};
 		~Hanafuda_Card_Texture() {
 			this->unload();
 		};
@@ -100,15 +76,8 @@ private:
 		};
 
 		virtual void draw() const {
-			/*if (select_) {
-				DrawTexture(highlight_, x_ - 5, y_ - 5, WHITE);
-			}*/
 			DrawTexture(texture_, (int) x_, (int) y_, WHITE);
 		};
-
-		/*void select() {
-			select_ = !select_;
-		};*/
 
 		int getWidth() const {
 			return texture_.width;
