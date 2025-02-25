@@ -582,7 +582,7 @@ public:
 
 	}
 
-	void parsePlayed(string& cards, float startX, float startY, vector<Hanafuda_Card_Texture>& into) {
+	void parsePlayed(string& cards, float startX, float startY, vector<Hanafuda_Card_Texture>& into) const {
 
 		if (!cards.empty()) {
 			deque<string> imgNames;
