@@ -130,13 +130,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="KoiKoi.h" />
     <ClInclude Include="src\Hanafuda_Card.h" />
     <ClInclude Include="src\Hanafuda_Deck.h" />
     <ClInclude Include="src\KoiKoi_Display.h" />
     <ClInclude Include="src\KoiKoi_Game.h" />
     <ClInclude Include="src\KoiKoi_Game_Handler.h" />
-    <ClInclude Include="src\Player.h" />
+    <ClInclude Include="src\KoiKoi_Player.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hanafuda_Card.cpp" />
@@ -144,8 +143,8 @@
     <ClCompile Include="src\KoiKoi_Display.cpp" />
     <ClCompile Include="src\KoiKoi_Game.cpp" />
     <ClCompile Include="src\KoiKoi_Game_Handler.cpp" />
+    <ClCompile Include="src\KoiKoi_Player.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="bin\seed_log.txt" />
