@@ -10,7 +10,7 @@
 // Program main entry point
 //------------------------------------------------------------------------------------
 int main(void) {
-	unsigned int seed = 1740462537;//UINT_MAX & time(nullptr);
+	unsigned int seed = UINT_MAX & time(nullptr);
 	std::ofstream seedFile;
 	seedFile.open("bin/seed_log.txt", std::ios::app);
 	if (seedFile.is_open()) {
