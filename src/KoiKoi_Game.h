@@ -5,7 +5,7 @@
 #include "Hanafuda_Deck.h"
 #include "KoiKoi_Display.h"
 #include "KoiKoi_Game_Handler.h"
-#include "Player.h"
+#include "KoiKoi_Player.h"
 #include <array>
 #include <cstdio>
 #include <cstdlib>

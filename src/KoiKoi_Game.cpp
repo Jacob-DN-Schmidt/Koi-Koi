@@ -1,10 +1,9 @@
 #include "Hanafuda_Card.h"
 #include "KoiKoi_Game.h"
 #include "KoiKoi_Game_Handler.h"
-#include "Player.h"
+#include "KoiKoi_Player.h"
 #include <array>
 #include <deque>
-#include <exception>
 #include <iostream>
 #include <string>
 #include <vector>
