@@ -1,9 +1,9 @@
+#include "boost/algorithm/string/classification.hpp"
+#include "boost/algorithm/string/constants.hpp"
 #include "boost/algorithm/string/split.hpp"
 #include "KoiKoi_Display.h"
 #include "raylib.h"
 #include <array>
-#include <boost/algorithm/string/classification.hpp>
-#include <boost/algorithm/string/constants.hpp>
 #include <cstdlib>
 #include <deque>
 #include <iostream>
