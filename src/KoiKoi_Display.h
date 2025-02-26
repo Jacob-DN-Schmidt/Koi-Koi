@@ -2,11 +2,11 @@
 #define KOIKOI_DISPLAY_H
 
 #include "boost/algorithm/string/classification.hpp"
-#include "boost/serialization/strong_typedef.hpp"
+#include "boost/algorithm/string/constants.hpp"
 #include "boost/algorithm/string/split.hpp"
+#include "boost/serialization/strong_typedef.hpp"
 #include "raylib.h"
 #include <array>
-#include <boost/algorithm/string/constants.hpp>
 #include <deque>
 #include <string>
 #include <vector>
@@ -20,7 +20,7 @@ using namespace::boost;
 namespace KoiKoi_Display_Enums {
 	BOOST_STRONG_TYPEDEF(float, FloatEnum)
 
-	constexpr float cwidth = 146.0f;
+		constexpr float cwidth = 146.0f;
 	constexpr float cheight = 240.0f;
 
 	constexpr float ywidth = 79.8f;
@@ -39,17 +39,17 @@ namespace KoiKoi_Display_Enums {
 
 class KoiKoi_Display {
 private:
-//------------------------------------------------------------------------------------------------------
-// Card Highlight/Back Textures
-//------------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------
+	// Card Highlight/Back Textures
+	//------------------------------------------------------------------------------------------------------
 	static Texture2D highlightTexture;
 	static Texture2D back_;
 
-//------------------------------------------------------------------------------------------------------
-// Card Highlight/Back Operations
-//------------------------------------------------------------------------------------------------------
-	
-	// Load highlight texture
+	//------------------------------------------------------------------------------------------------------
+	// Card Highlight/Back Operations
+	//------------------------------------------------------------------------------------------------------
+
+		// Load highlight texture
 	static void loadHighlight();
 	// Unload highlight texture
 	static void unloadHighlight();
@@ -60,11 +60,11 @@ private:
 	static void unloadBack();
 
 
-//------------------------------------------------------------------------------------------------------
-// Nested Card Texture Containers
-//------------------------------------------------------------------------------------------------------
-	
-	// Nested base class
+	//------------------------------------------------------------------------------------------------------
+	// Nested Card Texture Containers
+	//------------------------------------------------------------------------------------------------------
+
+		// Nested base class
 	class Hanafuda_Card_Texture {
 	public:
 		string imgID_;
@@ -131,24 +131,24 @@ private:
 	};
 
 
-//------------------------------------------------------------------------------------------------------
-// Interaction Control Flags
-//------------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------
+	// Interaction Control Flags
+	//------------------------------------------------------------------------------------------------------
 	bool canSelect_ = false;
 	bool callKoi_ = false;
 	bool tableSelect_ = false;
 
-//------------------------------------------------------------------------------------------------------
-// Selections
-//------------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------
+	// Selections
+	//------------------------------------------------------------------------------------------------------
 	bool mousePress_ = false;
 	bool callKoiChoice_ = false;
 	int handSelection_ = -1;
 	int tableSelection_ = -1;
 
-//------------------------------------------------------------------------------------------------------
-// Display Aspects
-//------------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------
+	// Display Aspects
+	//------------------------------------------------------------------------------------------------------
 	string cardToMatch_ = "";
 	string message_ = "";
 
@@ -167,9 +167,9 @@ private:
 
 
 public:
-//------------------------------------------------------------------------------------------------------
-// Window/Aspect dimensions and drawing/bouding coordinates
-//------------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------
+	// Window/Aspect dimensions and drawing/bouding coordinates
+	//------------------------------------------------------------------------------------------------------
 	float screenWidth = 100;
 	float screenHeight = 100;
 
@@ -204,17 +204,17 @@ public:
 	float noBoxX_ = 0;
 	float noBoxY_ = 0;
 
-//------------------------------------------------------------------------------------------------------
-// Constuctors/Destructors
-//------------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------
+	// Constuctors/Destructors
+	//------------------------------------------------------------------------------------------------------
 	KoiKoi_Display() {};
 	~KoiKoi_Display() {
 		this->closeWindow();
 	};
 
-//------------------------------------------------------------------------------------------------------
-// Window Operations
-//------------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------
+	// Window Operations
+	//------------------------------------------------------------------------------------------------------
 	void initiateWindow();		// Sets dimensions and coordinates to fit in fullscreen mode
 	void closeWindow() {		// Call when Display is meant to close; clears all textures out of vram
 		clearTextures();
@@ -223,14 +223,14 @@ public:
 		CloseWindow();
 	}
 
-//------------------------------------------------------------------------------------------------------
-// Drawing Operations
-//------------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------
+	// Drawing Operations
+	//------------------------------------------------------------------------------------------------------
 	void refreshDisplay();		// Draws game aspects; Mouse and keyboard interaction while looping
 
-//------------------------------------------------------------------------------------------------------
-// Interaction Operations
-//------------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------
+	// Interaction Operations
+	//------------------------------------------------------------------------------------------------------
 	void onMouseClick(int x, int y);							// Handles mouse inputs
 	array<int, 2> waitForSelection(const string& gamestate);	// Waits until one card in both the player's hand and on the table is selected and returns an array with the idex of the hand card followed by the index of the table card
 	int waitForTableSelection(int tableMatch1, int tableMatch2, int handSelection = -1, string message = "");	// Waits until index of selected card on table matches one of match indexes and returns index 
@@ -238,9 +238,9 @@ public:
 	bool promptCallKoi(const string& gamestate);				// Waits until player clicks yes or no
 	int promptMatch(const string& card, int firstMatch, int secondMatch);	//
 
-//------------------------------------------------------------------------------------------------------
-// Texture Operations
-//------------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------
+	// Texture Operations
+	//------------------------------------------------------------------------------------------------------
 	void updateGamestate(const string& gamestate);
 
 	void parseOpponentHand(string numCards) {
