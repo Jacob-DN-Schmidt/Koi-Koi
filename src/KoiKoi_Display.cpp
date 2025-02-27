@@ -113,45 +113,65 @@ void KoiKoi_Display::refreshDisplay() {
 		DrawText(message_.c_str(), (int) (paddingSide), (int) (playBoxHeight + (theight / 2)), 42, BLACK);
 	}
 
-	//cout << "Opp played draw\n";
+#ifdef CONSOL_DEBUG
+	cout << "Opp played draw\n";
+#endif
+
 	for (int i = 0; i < opponentPlayed_.size(); i++) {
 		opponentPlayed_[i].draw();
 	}
 
-	//cout << "Player played draw\n";
+#ifdef CONSOL_DEBUG
+	cout << "Player played draw\n";
+#endif
+
 	for (int i = 0; i < playerPlayed_.size(); i++) {
 		playerPlayed_[i].draw();
 	}
 
-	//cout << "Player hand draw\n";
+#ifdef CONSOL_DEBUG
+	cout << "Player hand draw\n";
+#endif
+
 	for (int i = 0; i < playerHandSelectable_.size(); i++) {
 		if (!playerHandSelectable_[i].selected_) {
 			playerHandSelectable_[i].draw();
 		}
 	}
 
-	//cout << "Player hand selected draw\n";
+#ifdef CONSOL_DEBUG
+	cout << "Player hand selected draw\n";
+#endif
+
 	for (int i = 0; i < playerHandSelectable_.size(); i++) {
 		if (playerHandSelectable_[i].selected_) {
 			playerHandSelectable_[i].draw();
 		}
 	}
 
-	//cout << "Table draw\n";
+#ifdef CONSOL_DEBUG
+	cout << "Table draw\n";
+#endif
+
 	for (int i = 0; i < tableSelectable_.size(); i++) {
 		if (!tableSelectable_[i].selected_) {
 			tableSelectable_[i].draw();
 		}
 	}
 
-	//cout << "Table selected draw\n";
+#ifdef CONSOL_DEBUG
+	cout << "Table selected draw\n";
+#endif
+
 	for (int i = 0; i < tableSelectable_.size(); i++) {
 		if (tableSelectable_[i].selected_) {
 			tableSelectable_[i].draw();
 		}
 	}
 
-	//cout << "Blanks draw\n";
+#ifdef CONSOL_DEBUG
+	cout << "Blanks draw\n";
+#endif
 	if (blanksToDraw != 0) {
 		float currentDisplacement = opponentHandBoxX;
 		float dx = 0;
@@ -170,11 +190,17 @@ void KoiKoi_Display::refreshDisplay() {
 		}
 	}
 
-	//cout << "Opp pts draw\n";
+#ifdef CONSOL_DEBUG
+	cout << "Opp pts draw\n";
+#endif
+
 	string temp = "Opponent Points: " + to_string(oppPts_);
 	DrawText(temp.c_str(), (int) (tableBoxWidth + paddingSide), (int) (tableBoxY + cheight - paddingTop), 24, BLACK);
 
-	//cout << "Player pts draw\n";
+#ifdef CONSOLE_DEBUG
+	cout << "Player pts draw\n";
+#endif
+
 	temp = "Player Points: " + to_string(playerPts_);
 	DrawText(temp.c_str(), (int) (tableBoxWidth + paddingSide), (int) (tableBoxY + cheight + (paddingTop * 3)), 24, BLACK);
 
