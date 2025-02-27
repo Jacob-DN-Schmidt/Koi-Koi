@@ -215,8 +215,11 @@ public:
 	//------------------------------------------------------------------------------------------------------
 	// Window Operations
 	//------------------------------------------------------------------------------------------------------
-	void initiateWindow();		// Sets dimensions and coordinates to fit in fullscreen mode
-	void closeWindow() {		// Call when Display is meant to close; clears all textures out of vram
+	
+	// Sets dimensions and coordinates to fit in fullscreen mode
+	void initiateWindow();
+	// Call when Display is meant to close; clears all textures out of vram
+	void closeWindow() {
 		clearTextures();
 		unloadHighlight();
 		unloadBack();
@@ -226,17 +229,28 @@ public:
 	//------------------------------------------------------------------------------------------------------
 	// Drawing Operations
 	//------------------------------------------------------------------------------------------------------
-	void refreshDisplay();		// Draws game aspects; Mouse and keyboard interaction while looping
+	
+	// Draws game aspects that have been parsed and loaded
+	// Mouse interaction flag - canSelect_
+	void refreshDisplay();
 
 	//------------------------------------------------------------------------------------------------------
 	// Interaction Operations
 	//------------------------------------------------------------------------------------------------------
-	void onMouseClick(int x, int y);							// Handles mouse inputs
-	array<int, 2> waitForSelection(const string& gamestate);	// Waits until one card in both the player's hand and on the table is selected and returns an array with the idex of the hand card followed by the index of the table card
-	int waitForTableSelection(int tableMatch1, int tableMatch2, int handSelection = -1, string message = "");	// Waits until index of selected card on table matches one of match indexes and returns index 
-	void pause(const string& gamestate);						// Waits until left mouse click or spacebar press
-	bool promptCallKoi(const string& gamestate);				// Waits until player clicks yes or no
-	int promptMatch(const string& card, int firstMatch, int secondMatch);	//
+	
+	// Handles mouse inputs
+	// Operation flags - callKoi_, tableSelect_
+	void onMouseClick(int x, int y);
+	// Waits until one card in both the player's hand and on the table is selected and returns an array with the idex of the hand card followed by the index of the table card
+	array<int, 2> waitForSelection(const string& gamestate);
+	// Waits until index of selected card on table matches one of match indexes and returns index 
+	int waitForTableSelection(int tableMatch1, int tableMatch2, int handSelection = -1, string message = "");
+	// Waits until left mouse click or spacebar press
+	void pause(const string& gamestate);
+	// Waits until player clicks yes or no
+	bool promptCallKoi(const string& gamestate);
+	// Waits until selected card on table matches the specified card
+	int promptMatch(const string& card, int firstMatch, int secondMatch);	
 
 	//------------------------------------------------------------------------------------------------------
 	// Texture Operations
