@@ -94,7 +94,7 @@ void KoiKoi_Display::initiateWindow() {
 //------------------------------------------------------------------------------------------------------
 void KoiKoi_Display::refreshDisplay() {
 
-	if ((canSelect_ || tableSelect_) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) mousePress_ = true;
+	if (canSelect_ && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) mousePress_ = true;
 
 	if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && mousePress_) {
 		onMouseClick(GetMouseX(), GetMouseY());
@@ -259,6 +259,7 @@ array<int, 2> KoiKoi_Display::waitForSelection(const string& gamestate) {
 }
 
 int KoiKoi_Display::waitForTableSelection(int tableMatch1, int tableMatch2, int handSelection, string message) {
+	canSelect_ = true;
 	tableSelect_ = true;
 	message_ = message;
 	selectTableAt(tableMatch1);
@@ -302,6 +303,7 @@ bool KoiKoi_Display::promptCallKoi(const string& gamestate) {
 }
 
 int KoiKoi_Display::promptMatch(const string& card, int firstMatch, int secondMatch) {
+	canSelect_ = true;
 	tableSelect_ = true;
 
 	if (card.front() == 'J') {
