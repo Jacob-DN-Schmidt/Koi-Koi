@@ -39,17 +39,19 @@ namespace KoiKoi_Display_Enums {
 
 class KoiKoi_Display {
 private:
+
 	//------------------------------------------------------------------------------------------------------
 	// Card Highlight/Back Textures
 	//------------------------------------------------------------------------------------------------------
 	static Texture2D highlightTexture;
 	static Texture2D back_;
 
+
 	//------------------------------------------------------------------------------------------------------
 	// Card Highlight/Back Operations
 	//------------------------------------------------------------------------------------------------------
 
-		// Load highlight texture
+	// Load highlight texture
 	static void loadHighlight();
 	// Unload highlight texture
 	static void unloadHighlight();
@@ -64,9 +66,10 @@ private:
 	// Nested Card Texture Containers
 	//------------------------------------------------------------------------------------------------------
 
-		// Nested base class
+	// Nested base class
 	class Hanafuda_Card_Texture {
 	public:
+
 		string imgID_;
 		float x_;
 		float y_;
@@ -103,6 +106,7 @@ private:
 	// Nested child class
 	class Hanafuda_Card_Selectable_Texture : public virtual Hanafuda_Card_Texture {
 	public:
+
 		bool selected_;
 		float hitboxWidth_;
 		float hitboxHeight_;
@@ -134,21 +138,26 @@ private:
 	//------------------------------------------------------------------------------------------------------
 	// Interaction Control Flags
 	//------------------------------------------------------------------------------------------------------
+
 	bool canSelect_ = false;
 	bool callKoi_ = false;
 	bool tableSelect_ = false;
 
+
 	//------------------------------------------------------------------------------------------------------
 	// Selections
 	//------------------------------------------------------------------------------------------------------
+
 	bool mousePress_ = false;
 	bool callKoiChoice_ = false;
 	int handSelection_ = -1;
 	int tableSelection_ = -1;
 
+
 	//------------------------------------------------------------------------------------------------------
 	// Display Aspects
 	//------------------------------------------------------------------------------------------------------
+
 	string cardToMatch_ = "";
 	string message_ = "";
 
@@ -165,11 +174,14 @@ private:
 	int playerPts_ = 0;
 	int oppPts_ = 0;
 
+// End private ========================================================================================== //
 
-public:
+public: 
+
 	//------------------------------------------------------------------------------------------------------
 	// Window/Aspect dimensions and drawing/bouding coordinates
 	//------------------------------------------------------------------------------------------------------
+
 	float screenWidth = 100;
 	float screenHeight = 100;
 
@@ -204,6 +216,7 @@ public:
 	float noBoxX_ = 0;
 	float noBoxY_ = 0;
 
+
 	//------------------------------------------------------------------------------------------------------
 	// Constuctors/Destructors
 	//------------------------------------------------------------------------------------------------------
@@ -211,6 +224,7 @@ public:
 	~KoiKoi_Display() {
 		this->closeWindow();
 	};
+
 
 	//------------------------------------------------------------------------------------------------------
 	// Window Operations
@@ -226,6 +240,7 @@ public:
 		CloseWindow();
 	}
 
+
 	//------------------------------------------------------------------------------------------------------
 	// Drawing Operations
 	//------------------------------------------------------------------------------------------------------
@@ -233,6 +248,7 @@ public:
 	// Draws game aspects that have been parsed and loaded
 	// Mouse interaction flag - canSelect_
 	void refreshDisplay();
+
 
 	//------------------------------------------------------------------------------------------------------
 	// Interaction Operations
@@ -251,6 +267,7 @@ public:
 	bool promptCallKoi(const string& gamestate);
 	// Waits until selected card on table matches the specified card
 	int promptMatch(const string& card, int firstMatch, int secondMatch);	
+
 
 	//------------------------------------------------------------------------------------------------------
 	// Texture Operations
