@@ -7,13 +7,16 @@
 #include "KoiKoi_Game_Handler.h"
 #include "KoiKoi_Player.h"
 #include <array>
-#include <cstdio>
 #include <cstdlib>
 #include <deque>
-#include <iosfwd>
-#include <iostream>
 #include <string>
 #include <vector>
+
+#ifdef CONSOLE_DEBUG
+#include <cstdio>
+#include <iosfwd>
+#include <iostream>
+#endif // CONSOLE_DEBUG
 
 class KoiKoi_Game {
 private:
@@ -28,21 +31,25 @@ private:
 
 	KoiKoi_Display display_;
 
+#ifdef CONSOLE_DEBUG
 	void pauseToSwap() {
 		system("CLS");
 		cout << "Swap player and press enter to continue";
 		(void) getchar();
 		system("CLS");
 	};
+
 	void pause() {
 		cout << "Press enter to continue\n";
 		(void) getchar();
-	}
+	};
+
 	void refresh() {
 		system("CLS");
 		cout << "Player " << (this->turn_ + 1) << "'s turn\n";
 		cout << this->toFormattedString();
 	};
+#endif // CONSOLE_DEBUG
 
 public:
 	// KOIKOI_DOUBLE_SCORE, SEVEN_POINTS_DOUBLE_SCORE, COUNT_RIBBON_SET_AS_FIVE, SPOIL_VIEWING, CAN_COUNT_SAKE_AS_JUNK, TESHI_KUTTSUKI
@@ -86,6 +93,8 @@ public:
 
 	string gamestate();
 	string tableImage();
+
+#ifdef CONSOLE_DEBUG
 	string tableToFormattedString() const;
 	string toFormattedString() {
 		/*string res = "Opponent " + this->players_[!(this->turn_)].playedToFormattedString() + "\n";
@@ -95,8 +104,11 @@ public:
 			this->tableToFormattedString() + "\nYour " + this->players_[this->turn_].playedToFormattedString() + "\n";
 	}
 
+
 	friend ostream& operator<<(ostream& os, KoiKoi_Game& game) {
 		return os << game.toFormattedString();
 	};
+#endif // CONSOLE_DEBUG
+
 };
 #endif // !KOIKOI_GAME_H
