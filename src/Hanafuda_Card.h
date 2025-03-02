@@ -36,8 +36,6 @@ public:
 	};
 
 	Hanafuda_Card(int setMonth = 0, int setSuit = 0, string setName = "", int idSuffix = -1) :month_(setMonth), suit_(setSuit), name_(setName), imgID_() { this->setImgID(idSuffix); };
-	//Hanafuda_Card(const Hanafuda_Card& card) :month_(card.month_), suit_(card.suit_), name_(card.name_), imgID_(card.imgID_) {};
-	//Hanafuda_Card(const Hanafuda_Card* card) :month_(card->month_), suit_(card->suit_), name_(card->name_), imgID_(card->imgID_) {};
 	Hanafuda_Card(string card, int idSuffix = -1);
 
 	int getMonth() const { return this->month_; };
