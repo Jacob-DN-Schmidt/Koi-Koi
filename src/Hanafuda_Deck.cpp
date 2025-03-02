@@ -1,8 +1,5 @@
 #include "Hanafuda_Card.h"
 #include "Hanafuda_Deck.h"
-#include <boost/format.hpp>
-#include <boost/format/format_fwd.hpp>
-#include <boost/format/free_funcs.hpp>
 #include <cstdlib>
 #include <deque>
 #include <exception>
