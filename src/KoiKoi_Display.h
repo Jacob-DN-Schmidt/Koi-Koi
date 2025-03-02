@@ -20,7 +20,7 @@ using namespace::boost;
 namespace KoiKoi_Display_Enums {
 	BOOST_STRONG_TYPEDEF(float, FloatEnum)
 
-		constexpr float cwidth = 146.0f;
+	constexpr float cwidth = 146.0f;
 	constexpr float cheight = 240.0f;
 
 	constexpr float ywidth = 79.8f;
@@ -43,6 +43,7 @@ private:
 	//------------------------------------------------------------------------------------------------------
 	// Card Highlight/Back Textures
 	//------------------------------------------------------------------------------------------------------
+
 	static Texture2D highlightTexture;
 	static Texture2D back_;
 
