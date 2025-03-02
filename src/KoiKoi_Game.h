@@ -52,22 +52,21 @@ private:
 #endif // CONSOLE_DEBUG
 
 public:
+	//------------------------------------------------------------------------------------------------------
+	// Game Flow Logic
+	//------------------------------------------------------------------------------------------------------
+	
 	// KOIKOI_DOUBLE_SCORE, SEVEN_POINTS_DOUBLE_SCORE, COUNT_RIBBON_SET_AS_FIVE, SPOIL_VIEWING, CAN_COUNT_SAKE_AS_JUNK, TESHI_KUTTSUKI
 	KoiKoi_Game(int rounds = 6, string ruleset = "110011") : rounds_(rounds), ruleset_(ruleset), players_(), deck_(Hanafuda_Deck()), table_(deque<Hanafuda_Card*>()), turn_(rand() % 2), oya_(false), display_() { this->deck_.shuffle(); display_.initiateWindow(); };
 	void startGame();
 	void startRound();
-	void resetRound() { this->players_[Player1].clearCards(); this->players_[Player2].clearCards(); KoiKoi_Game_Handler::deleteDequeContent(this->table_); this->deck_.reset(); display_.clearTextures(); }
-	//static Hanafuda_Card* promptToPlayCard(Player& player);
+	void resetRound() { this->players_[Player1].clearCards(); this->players_[Player2].clearCards(); KoiKoi_Game_Handler::deleteDequeContent(this->table_); this->deck_.reset(); display_.clearTextures(); };
 	void playerTurn();
+	
+	//------------------------------------------------------------------------------------------------------
+	// Game Actions
+	//------------------------------------------------------------------------------------------------------
 	void drawFromDeck();
-	bool validateTable() const {
-		array<int, 12> monthCounts = KoiKoi_Game_Handler::tabulateMonths(this->table_);
-		for (int i = 0; i < monthCounts.size(); i++)
-			if (monthCounts[i] == 4)
-				return false;
-		return true;
-	};
-
 	void dealCards() {
 		for (int i = 0; i < 8; i++) {
 			this->players_[!oya_].drawCard(this->deck_);
@@ -75,21 +74,15 @@ public:
 			this->players_[oya_].drawCard(this->deck_);
 		}
 	};
+	bool validateTable() const;
 
+	vector<int> checkMatch(const Hanafuda_Card* card);
 	int nextMatch(const Hanafuda_Card* card) {
 		for (int i = 0; i < this->table_.size(); i++) {
 			if (this->table_[i]->match(card)) return i;
 		}
 		return -1;
 	}
-
-	vector<int> checkMatch(const Hanafuda_Card* card) {
-		vector<int> indexes;
-		for (int i = 0; i < this->table_.size(); i++) {
-			if (this->table_[i]->match(card)) indexes.push_back(i);
-		}
-		return indexes;
-	};
 
 	string gamestate();
 	string tableImage();

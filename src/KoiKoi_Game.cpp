@@ -214,6 +214,14 @@ void KoiKoi_Game::drawFromDeck() {
 	}
 }
 
+bool KoiKoi_Game::validateTable() const {
+	array<int, 12> monthCounts = KoiKoi_Game_Handler::tabulateMonths(this->table_);
+	for (int i = 0; i < monthCounts.size(); i++)
+		if (monthCounts[i] == 4)
+			return false;
+	return true;
+}
+
 vector<int> KoiKoi_Game::checkMatch(const Hanafuda_Card* card) {
 	vector<int> indexes;
 	for (int i = 0; i < this->table_.size(); i++) {
