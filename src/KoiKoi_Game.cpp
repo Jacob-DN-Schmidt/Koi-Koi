@@ -11,29 +11,12 @@
 #include <iostream>
 #endif // CONSOLE_DEBUG
 
-
-//Hanafuda_Card* KoiKoi_Game::promptToPlayCard(Player& player) {
-//	cout << player << "\nWhich card would you like to play?\n";
-//	string ans = "";
-//	regex match("([0-9]+)", regex::ECMAScript);
-//	while (true) {
-//		getline(cin, ans);
-//		if (regex_match(ans, match)) {
-//			int res = stoi(regex_replace(ans, match, "$1"));
-//			if (res <= player.getHandSize()) {
-//				return player.playCard(res - 1);
-//			}
-//		}
-//	}
-//}
-
 void KoiKoi_Game::startGame() {
 	KoiKoi_Game_Handler::setGameRule(this->ruleset_);
 
 #ifdef CONSOLE_DEBUG
 	cout << "Player " << (this->turn_ + 1) << " will start\n\n";
 #endif // CONSOLE_DEBUG
-
 
 	for (int i = 0; i < this->rounds_; i++) {
 		this->startRound();
@@ -57,6 +40,7 @@ void KoiKoi_Game::startRound() {
 
 	while (true) {
 		this->dealCards();
+
 		if (!this->validateTable()) {
 
 #ifdef CONSOLE_DEBUG
@@ -155,7 +139,6 @@ void KoiKoi_Game::startRound() {
 		}
 		turn_ = !turn_;
 	}
-
 }
 
 void KoiKoi_Game::playerTurn() {
@@ -194,16 +177,17 @@ void KoiKoi_Game::drawFromDeck() {
 
 #ifdef CONSOLE_DEBUG
 	cout << "Card drawn from deck: " << temp->toFormattedString() << "\n";
-#endif
+#endif // CONSOLE_DEBUG
 
 	vector<int> matches = this->checkMatch(temp);
 	display_.updateGamestate(this->gamestate());
+
 	if (matches.size() == 0) {
 		Hanafuda_Card::insert(temp, this->table_);
 
 #ifdef CONSOLE_DEBUG
 		cout << "No matches: added to table\n\n";
-#endif
+#endif // CONSOLE_DEBUG
 
 	}
 	else if (matches.size() == 3) {
@@ -225,9 +209,17 @@ void KoiKoi_Game::drawFromDeck() {
 
 #ifdef CONSOLE_DEBUG
 		cout << "1 match: added to played cards\n\n";
-#endif
+#endif // CONSOLE_DEBUG
 
 	}
+}
+
+vector<int> KoiKoi_Game::checkMatch(const Hanafuda_Card* card) {
+	vector<int> indexes;
+	for (int i = 0; i < this->table_.size(); i++) {
+		if (this->table_[i]->match(card)) indexes.push_back(i);
+	}
+	return indexes;
 }
 
 string KoiKoi_Game::gamestate() {
@@ -263,4 +255,4 @@ string KoiKoi_Game::tableToFormattedString() const {
 	res += to_string(cardNum) + ": " + (*itr)->toFormattedString() + "\n";
 	return res;
 }
-#endif
+#endif // CONSOLE_DEBUG
