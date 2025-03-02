@@ -59,15 +59,7 @@ int KoiKoi_Game_Handler::promptToDecideMatch(const int& one, const int& two) {
 Hanafuda_Card* KoiKoi_Game_Handler::popCardAt(deque<Hanafuda_Card*>& from, int at) {
 	deque<Hanafuda_Card*>::iterator itr = from.begin() + at;
 	Hanafuda_Card* temp = *itr;
-	//if (at == from.size() - 1) {
-	//	from.pop_back();
-	//}
-	//else if (at == 0) {
-	//	from.pop_front();
-	//}
-	//else {
 	from.erase(itr);
-	//}
 	return temp;
 }
 
