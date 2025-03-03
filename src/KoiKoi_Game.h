@@ -31,7 +31,7 @@ private:
 
 	KoiKoi_Display display_;
 
-#ifdef CONSOLE_DEBUG
+#ifdef CONSOLE_PLAY
 	void pauseToSwap() {
 		system("CLS");
 		cout << "Swap player and press enter to continue";
@@ -49,7 +49,7 @@ private:
 		cout << "Player " << (this->turn_ + 1) << "'s turn\n";
 		cout << this->toFormattedString();
 	};
-#endif // CONSOLE_DEBUG
+#endif // CONSOLE_PLAY
 
 public:
 	//------------------------------------------------------------------------------------------------------
@@ -60,29 +60,18 @@ public:
 	KoiKoi_Game(int rounds = 6, string ruleset = "110011") : rounds_(rounds), ruleset_(ruleset), players_(), deck_(Hanafuda_Deck()), table_(deque<Hanafuda_Card*>()), turn_(rand() % 2), oya_(false), display_() { this->deck_.shuffle(); display_.initiateWindow(); };
 	void startGame();
 	void startRound();
-	void resetRound() { this->players_[Player1].clearCards(); this->players_[Player2].clearCards(); KoiKoi_Game_Handler::deleteDequeContent(this->table_); this->deck_.reset(); display_.clearTextures(); };
+	void resetRound();
 	void playerTurn();
 	
 	//------------------------------------------------------------------------------------------------------
 	// Game Actions
 	//------------------------------------------------------------------------------------------------------
 	void drawFromDeck();
-	void dealCards() {
-		for (int i = 0; i < 8; i++) {
-			this->players_[!oya_].drawCard(this->deck_);
-			Hanafuda_Card::insert(this->deck_.dealCard(), this->table_);
-			this->players_[oya_].drawCard(this->deck_);
-		}
-	};
+	void dealCards();
 	bool validateTable() const;
 
 	vector<int> checkMatch(const Hanafuda_Card* card);
-	int nextMatch(const Hanafuda_Card* card) {
-		for (int i = 0; i < this->table_.size(); i++) {
-			if (this->table_[i]->match(card)) return i;
-		}
-		return -1;
-	}
+	int nextMatch(const Hanafuda_Card* card);
 
 	string gamestate();
 	string tableImage();
@@ -90,9 +79,6 @@ public:
 #ifdef CONSOLE_DEBUG
 	string tableToFormattedString() const;
 	string toFormattedString() {
-		/*string res = "Opponent " + this->players_[!(this->turn_)].playedToFormattedString() + "\n";
-		res += this->tableToFormattedString() + "\n";
-		res += "Your " + this->players_[this->turn_].playedToFormattedString() + "\n";*/
 		return "Opponent " + this->players_[!(this->turn_)].playedToFormattedString() + "\n" +
 			this->tableToFormattedString() + "\nYour " + this->players_[this->turn_].playedToFormattedString() + "\n";
 	}

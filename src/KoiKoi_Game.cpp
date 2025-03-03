@@ -141,6 +141,13 @@ void KoiKoi_Game::startRound() {
 	}
 }
 
+void KoiKoi_Game::resetRound() { 
+	this->players_[Player1].clearCards(); 
+	this->players_[Player2].clearCards(); 
+	KoiKoi_Game_Handler::deleteDequeContent(this->table_); 
+	this->deck_.reset(); display_.clearTextures(); 
+}
+
 void KoiKoi_Game::playerTurn() {
 	Player& player = players_[turn_];
 	array<int, 2> choices = display_.waitForSelection(this->gamestate());
@@ -214,6 +221,14 @@ void KoiKoi_Game::drawFromDeck() {
 	}
 }
 
+void KoiKoi_Game::dealCards() {
+	for (int i = 0; i < 8; i++) {
+		this->players_[!oya_].drawCard(this->deck_);
+		Hanafuda_Card::insert(this->deck_.dealCard(), this->table_);
+		this->players_[oya_].drawCard(this->deck_);
+	}
+}
+
 bool KoiKoi_Game::validateTable() const {
 	array<int, 12> monthCounts = KoiKoi_Game_Handler::tabulateMonths(this->table_);
 	for (int i = 0; i < monthCounts.size(); i++)
@@ -228,6 +243,13 @@ vector<int> KoiKoi_Game::checkMatch(const Hanafuda_Card* card) {
 		if (this->table_[i]->match(card)) indexes.push_back(i);
 	}
 	return indexes;
+}
+
+int KoiKoi_Game::nextMatch(const Hanafuda_Card* card) {
+	for (int i = 0; i < this->table_.size(); i++) {
+		if (this->table_[i]->match(card)) return i;
+	}
+	return -1;
 }
 
 string KoiKoi_Game::gamestate() {
