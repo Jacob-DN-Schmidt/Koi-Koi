@@ -112,7 +112,7 @@ public:
 		SEVEN_POINTS_DOUBLE_SCORE = true;
 		COUNT_RIBBON_SET_AS_FIVE = false;
 		SPOIL_VIEWING = false;
-		CAN_COUNT_SAKE_AS_JUNK = true;
+		CAN_COUNT_SAKE_AS_JUNK = false;
 		TESHI_KUTTSUKI = true;
 	};
 
