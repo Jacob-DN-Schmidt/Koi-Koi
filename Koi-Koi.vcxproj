@@ -147,7 +147,6 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="bin\seed_log.txt" />
     <Text Include="Hanafuda Cards\CardInfo.txt" />
   </ItemGroup>
   <ItemGroup>
