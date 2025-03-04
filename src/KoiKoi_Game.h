@@ -4,9 +4,7 @@
 #include "Hanafuda_Card.h"
 #include "Hanafuda_Deck.h"
 #include "KoiKoi_Display.h"
-#include "KoiKoi_Game_Handler.h"
 #include "KoiKoi_Player.h"
-#include <array>
 #include <cstdlib>
 #include <deque>
 #include <string>
