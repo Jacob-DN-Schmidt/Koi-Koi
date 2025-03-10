@@ -8,7 +8,7 @@
 
 class Hanafuda_Deck {
 private:
-	deque<Hanafuda_Card*> deck_;
+	std::deque<Hanafuda_Card*> deck_;
 
 	void initializeFromFile();
 
@@ -23,8 +23,8 @@ public:
 		Hanafuda_Card* temp = this->deck_[first]; this->deck_[first] = this->deck_[second]; this->deck_[second] = temp; temp = nullptr;
 	};
 
-	string deckImage() {
-		string res = "";
+	std::string deckImage() {
+		std::string res = "";
 		for (int i = 0; i < this->deck_.size() - 1; i++) {
 			res += this->deck_[i]->getImgID() + ",";
 		}
@@ -32,6 +32,6 @@ public:
 		return res;
 	};
 
-	friend ostream& operator<<(ostream& os, Hanafuda_Deck& deck);
+	friend std::ostream& operator<<(std::ostream& os, Hanafuda_Deck& deck);
 };
 #endif // !HANAFUDA_DECK_H
