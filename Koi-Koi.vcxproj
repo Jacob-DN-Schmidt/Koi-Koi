@@ -147,6 +147,7 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="bin\KoiKoi_Game_Image_Formatting.txt" />
     <Text Include="Hanafuda Cards\CardInfo.txt" />
   </ItemGroup>
   <ItemGroup>

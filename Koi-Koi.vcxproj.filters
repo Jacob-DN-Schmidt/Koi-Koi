@@ -64,6 +64,9 @@
     <Text Include="Hanafuda Cards\CardInfo.txt">
       <Filter>Resource Files\Hanafuda Cards</Filter>
     </Text>
+    <Text Include="bin\KoiKoi_Game_Image_Formatting.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Hanafuda Cards\M0_S0_A.png">
