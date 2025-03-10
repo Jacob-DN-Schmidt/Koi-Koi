@@ -1,0 +1,22 @@
+This file contains the formatting for a Koi-Koi gamestate used by the AI.
+It is designed to reflect the info availible to the player whose turn it is while playing the game. 
+Each entry (in and including the brackets; [*]) on each line is replaced by its respective value in the game where the active player is the player whose turn it is and the inactive player is the other player.
+Each line is followed by a forward slash ('/') with exception for the final line.
+Cards are in the format [month]_[suit] where: 
+	[month] is the numerical representation of the month the flower belongs to; Pine = January = 1, Plum Blossom = February = 2, Cherry Blossom = March = 3, Wisteria = April = 4, Iris = May = 5, Peony = June = 6, Bush Clover = July = 7, Susuki Grass = August = 8, Chrysanthemum = September = 9, Maple = October = 10, Willow = November = 11, Paulownia = December = 12
+	[suit] is the numerical representation of the suit; Kasu = 0, Tanzaku = 1, Akatan = 2, Aotan = 3, Hikari = 4
+Lists of cards are delimited by commas (',')
+Comments are contained within curly braces ('{}') and shall not be included in the implementation.
+
+Example:
+1/
+
+[number of cards in inactive player hand]/
+[cards in inactive player played]/
+[cards in active player hand]/
+[cards in active player played]/
+[cards on table]/
+[inactive player points]/
+[active player points]/
+[active player is oya]/
+[koi has been called][caller is active player]
