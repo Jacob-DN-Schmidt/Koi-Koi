@@ -15,7 +15,7 @@ void KoiKoi_Game::startGame() {
 	KoiKoi_Game_Handler::setGameRule(this->ruleset_);
 
 #ifdef CONSOLE_DEBUG
-	cout << "Player " << (this->turn_ + 1) << " will start\n\n";
+	std::cout << "Player " << (this->turn_ + 1) << " will start\n\n";
 #endif // CONSOLE_DEBUG
 
 	for (int i = 0; i < this->rounds_; i++) {
@@ -23,8 +23,8 @@ void KoiKoi_Game::startGame() {
 		resetRound();
 
 #ifdef CONSOLE_DEBUG
-		cout << "Player 1 points: " << to_string(players_[0].getPoints()) << "\nPlayer 2 points: " << to_string(players_[1].getPoints()) << "\n";
-		cout << "Opp points: " + to_string(players_[!turn_].getPoints()) + "\nPlayer points:" + to_string(players_[turn_].getPoints()) + "\n\n";
+		std::cout << "Player 1 points: " << to_string(players_[0].getPoints()) << "\nPlayer 2 points: " << to_string(players_[1].getPoints()) << "\n";
+		std::cout << "Opp points: " + to_string(players_[!turn_].getPoints()) + "\nPlayer points:" + to_string(players_[turn_].getPoints()) + "\n\n";
 #endif // CONSOLE_DEBUG
 
 	}
@@ -35,7 +35,7 @@ void KoiKoi_Game::startRound() {
 	oya_ = turn_;
 
 #ifdef CONSOLE_DEBUG
-	cout << "Opp points: " + to_string(players_[!turn_].getPoints()) + "\nPlayer points:" + to_string(players_[turn_].getPoints()) + "\n\n";
+	std::cout << "Opp points: " + to_string(players_[!turn_].getPoints()) + "\nPlayer points:" + to_string(players_[turn_].getPoints()) + "\n\n";
 #endif // CONSOLE_DEBUG
 
 	while (true) {
@@ -44,7 +44,7 @@ void KoiKoi_Game::startRound() {
 		if (!this->validateTable()) {
 
 #ifdef CONSOLE_DEBUG
-			cout << "invalid table, resetting round\n";
+			std::cout << "invalid table, resetting round\n";
 #endif // CONSOLE_DEBUG
 
 			this->resetRound();
@@ -61,7 +61,7 @@ void KoiKoi_Game::startRound() {
 		if (teshiKuttsukiPoints != 0) {
 
 #ifdef CONSOLE_DEBUG
-			cout << "Player " << (i + 1) << " Teyaku!\n";
+			std::cout << "Player " << (i + 1) << " Teyaku!\n";
 #endif CONSOLE_DEBUG
 
 			players_[i].addPoints(teshiKuttsukiPoints);
@@ -82,13 +82,13 @@ void KoiKoi_Game::startRound() {
 	// Player1 round points, Player2 round points
 	int roundPoints[] = { 0, 0 };
 	// Player1 called, Player2 called
-	bool koikoiCalled[] = { false, false };
+	//bool koiCalled[] = { false, false };
 	while (true) {
 
 		if (players_[oya_].getHandSize() == 0 && players_[!oya_].getHandSize() == 0) {
 
 #ifdef CONSOLE_DEBUG
-			cout << "No hands were made! Oya's authority\n\n";
+			std::cout << "No hands were made! Oya's authority\n\n";
 #endif // CONSOLE_DEBUG
 
 			players_[oya_].addPoints(6);
@@ -97,14 +97,14 @@ void KoiKoi_Game::startRound() {
 		}
 
 #ifdef CONSOLE_DEBUG
-		cout << "Player " << (this->turn_ + 1) << "'s turn\n" << this->toFormattedString() << players_[turn_];
+		std::cout << "Player " << (this->turn_ + 1) << "'s turn\n" << this->toFormattedString() << players_[turn_];
 #endif
 
 		Player& current = this->players_[this->turn_];
 		playerTurn();
 		drawFromDeck();
 		display_.pause(this->gamestate());
-		int currentHandEval = current.calcPlayedCardsVal(koikoiCalled[!turn_]);
+		int currentHandEval = current.calcPlayedCardsVal(koiCalled[!turn_]);
 
 		if (roundPoints[turn_] != currentHandEval) {
 			roundPoints[turn_] = currentHandEval;
@@ -112,12 +112,12 @@ void KoiKoi_Game::startRound() {
 			if (current.getHandSize() != 0) {
 
 #ifdef CONSOLE_DEBUG
-				cout << current << "\nCurrent played cards value: " << to_string(currentHandEval) << "\n";
+				std::cout << current << "\nCurrent played cards value: " << to_string(currentHandEval) << "\n";
 #endif // CONSOLE_DEBUG
 
-				koikoiCalled[turn_] = display_.promptCallKoi(this->gamestate());
+				koiCalled[turn_] = display_.promptCallKoi(this->gamestate());
 
-				if (!koikoiCalled[turn_]) {
+				if (!koiCalled[turn_]) {
 					current.addPoints(currentHandEval);
 
 #ifdef CONSOLE_DEBUG
@@ -145,14 +145,17 @@ void KoiKoi_Game::resetRound() {
 	this->players_[Player1].clearCards(); 
 	this->players_[Player2].clearCards(); 
 	KoiKoi_Game_Handler::deleteDequeContent(this->table_); 
-	this->deck_.reset(); display_.clearTextures(); 
+	this->deck_.reset(); 
+	display_.clearTextures(); 
+	koiCalled[0] = false;
+	koiCalled[1] = false;
 }
 
 void KoiKoi_Game::playerTurn() {
 	Player& player = players_[turn_];
-	array<int, 2> choices = display_.waitForSelection(this->gamestate());
+	std::array<int, 2> choices = display_.waitForSelection(this->gamestate());
 	Hanafuda_Card* cardFromHand = player.playCard(choices[0]);
-	vector<int> matches = this->checkMatch(cardFromHand);
+	std::vector<int> matches = this->checkMatch(cardFromHand);
 	if (matches.size() == 0) {
 		Hanafuda_Card::insert(cardFromHand, this->table_);
 	}
@@ -186,7 +189,7 @@ void KoiKoi_Game::drawFromDeck() {
 	cout << "Card drawn from deck: " << temp->toFormattedString() << "\n";
 #endif // CONSOLE_DEBUG
 
-	vector<int> matches = this->checkMatch(temp);
+	std::vector<int> matches = this->checkMatch(temp);
 	display_.updateGamestate(this->gamestate());
 
 	if (matches.size() == 0) {
@@ -230,15 +233,15 @@ void KoiKoi_Game::dealCards() {
 }
 
 bool KoiKoi_Game::validateTable() const {
-	array<int, 12> monthCounts = KoiKoi_Game_Handler::tabulateMonths(this->table_);
+	std::array<int, 12> monthCounts = KoiKoi_Game_Handler::tabulateMonths(this->table_);
 	for (int i = 0; i < monthCounts.size(); i++)
 		if (monthCounts[i] == 4)
 			return false;
 	return true;
 }
 
-vector<int> KoiKoi_Game::checkMatch(const Hanafuda_Card* card) {
-	vector<int> indexes;
+std::vector<int> KoiKoi_Game::checkMatch(const Hanafuda_Card* card) {
+	std::vector<int> indexes;
 	for (int i = 0; i < this->table_.size(); i++) {
 		if (this->table_[i]->match(card)) indexes.push_back(i);
 	}
@@ -252,20 +255,22 @@ int KoiKoi_Game::nextMatch(const Hanafuda_Card* card) {
 	return -1;
 }
 
-string KoiKoi_Game::gamestate() {
-	string res = "";
-	res += to_string(players_[!turn_].getHandSize()) + "/";
+std::string KoiKoi_Game::gamestate() {
+	std::string res = "";
+	res += std::to_string(players_[!turn_].getHandSize()) + "/";
 	res += players_[!turn_].playedImage() + "/";
 	res += players_[turn_].handImage() + "/";
 	res += players_[turn_].playedImage() + "/";
 	res += tableImage() + "/";
-	res += to_string(players_[!turn_].getPoints()) + "/";
-	res += to_string(players_[turn_].getPoints()) + "/";
+	res += std::to_string(players_[!turn_].getPoints()) + "/";
+	res += std::to_string(players_[turn_].getPoints()) + "/";
+	res += std::to_string(oya_ == turn_) + "/";
+	res += std::to_string(koiCalled[0] || koiCalled[1]) + std::to_string(koiCalled[turn_]);
 	return res;
 }
 
-string KoiKoi_Game::tableImage() {
-	string res = "";
+std::string KoiKoi_Game::tableImage() {
+	std::string res = "";
 	for (int i = 0; i < table_.size() - 1; i++) {
 		res += table_[i]->getImgID() + ",";
 	}
@@ -273,16 +278,16 @@ string KoiKoi_Game::tableImage() {
 	return res;
 }
 
-#ifdef CONSOLE_DEBUG
-string KoiKoi_Game::tableToFormattedString() const {
+#ifdef CONSOLE_PLAY
+std::string KoiKoi_Game::tableToFormattedString() const {
 	if (this->table_.size() < 1) return "Table is empty\n";
-	string res = "Table:\n";
+	std::string res = "Table:\n";
 	int cardNum;
-	deque<Hanafuda_Card*>::const_iterator itr = this->table_.begin();
+	std::deque<Hanafuda_Card*>::const_iterator itr = this->table_.begin();
 	for (cardNum = 1; cardNum < this->table_.size(); cardNum++, itr++) {
-		res += to_string(cardNum) + ": " + (*itr)->toFormattedString() + " | ";
+		res += std::to_string(cardNum) + ": " + (*itr)->toFormattedString() + " | ";
 	}
-	res += to_string(cardNum) + ": " + (*itr)->toFormattedString() + "\n";
+	res += std::to_string(cardNum) + ": " + (*itr)->toFormattedString() + "\n";
 	return res;
 }
-#endif // CONSOLE_DEBUG
+#endif // CONSOLE_PLAY

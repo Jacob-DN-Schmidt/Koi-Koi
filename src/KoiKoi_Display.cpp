@@ -86,7 +86,7 @@ void KoiKoi_Display::initiateWindow() {
 	loadHighlight();
 	loadBack();
 
-	cout << "width: " << screenWidth << " hight: " << screenHeight << " pbw: " << handBoxWidth << " pbh: " << playBoxHeight << " ps: " << paddingSide << " pt: " << paddingTop << "\n";
+	std::cout << "width: " << screenWidth << " hight: " << screenHeight << " pbw: " << handBoxWidth << " pbh: " << playBoxHeight << " ps: " << paddingSide << " pt: " << paddingTop << "\n";
 }
 
 //------------------------------------------------------------------------------------------------------
@@ -114,7 +114,7 @@ void KoiKoi_Display::refreshDisplay() {
 	}
 
 #ifdef CONSOL_DEBUG
-	cout << "Opp played draw\n";
+	std::cout << "Opp played draw\n";
 #endif
 
 	for (int i = 0; i < opponentPlayed_.size(); i++) {
@@ -122,7 +122,7 @@ void KoiKoi_Display::refreshDisplay() {
 	}
 
 #ifdef CONSOL_DEBUG
-	cout << "Player played draw\n";
+	std::cout << "Player played draw\n";
 #endif
 
 	for (int i = 0; i < playerPlayed_.size(); i++) {
@@ -130,7 +130,7 @@ void KoiKoi_Display::refreshDisplay() {
 	}
 
 #ifdef CONSOL_DEBUG
-	cout << "Player hand draw\n";
+	std::cout << "Player hand draw\n";
 #endif
 
 	for (int i = 0; i < playerHandSelectable_.size(); i++) {
@@ -140,7 +140,7 @@ void KoiKoi_Display::refreshDisplay() {
 	}
 
 #ifdef CONSOL_DEBUG
-	cout << "Player hand selected draw\n";
+	std::cout << "Player hand selected draw\n";
 #endif
 
 	for (int i = 0; i < playerHandSelectable_.size(); i++) {
@@ -150,7 +150,7 @@ void KoiKoi_Display::refreshDisplay() {
 	}
 
 #ifdef CONSOL_DEBUG
-	cout << "Table draw\n";
+	std::cout << "Table draw\n";
 #endif
 
 	for (int i = 0; i < tableSelectable_.size(); i++) {
@@ -160,7 +160,7 @@ void KoiKoi_Display::refreshDisplay() {
 	}
 
 #ifdef CONSOL_DEBUG
-	cout << "Table selected draw\n";
+	std::cout << "Table selected draw\n";
 #endif
 
 	for (int i = 0; i < tableSelectable_.size(); i++) {
@@ -170,7 +170,7 @@ void KoiKoi_Display::refreshDisplay() {
 	}
 
 #ifdef CONSOL_DEBUG
-	cout << "Blanks draw\n";
+	std::cout << "Blanks draw\n";
 #endif
 	if (blanksToDraw != 0) {
 		float currentDisplacement = opponentHandBoxX;
@@ -191,17 +191,17 @@ void KoiKoi_Display::refreshDisplay() {
 	}
 
 #ifdef CONSOL_DEBUG
-	cout << "Opp pts draw\n";
+	std::cout << "Opp pts draw\n";
 #endif
 
-	string temp = "Opponent Points: " + to_string(oppPts_);
+	std::string temp = "Opponent Points: " + std::to_string(oppPts_);
 	DrawText(temp.c_str(), (int) (tableBoxWidth + paddingSide), (int) (tableBoxY + cheight - paddingTop), 24, BLACK);
 
 #ifdef CONSOLE_DEBUG
-	cout << "Player pts draw\n";
+	std::cout << "Player pts draw\n";
 #endif
 
-	temp = "Player Points: " + to_string(playerPts_);
+	temp = "Player Points: " + std::to_string(playerPts_);
 	DrawText(temp.c_str(), (int) (tableBoxWidth + paddingSide), (int) (tableBoxY + cheight + (paddingTop * 3)), 24, BLACK);
 
 	EndDrawing();
@@ -226,11 +226,11 @@ void KoiKoi_Display::onMouseClick(int x, int y) {
 	}
 	else if (tableSelect_) {
 		for (int i = 0; i < tableSelectable_.size(); i++) {
-			cout << to_string(tableSelectable_.size()) << " " << to_string(i) << "\n";
+			std::cout << std::to_string(tableSelectable_.size()) << " " << std::to_string(i) << "\n";
 			if (tableSelectable_[i].selected_ && tableSelectable_[i].checkClick(x, y)) {
-				cout << "Select Success ";
+				std::cout << "Select Success ";
 				tableSelection_ = i;
-				cout << tableSelection_ << "\n";
+				std::cout << tableSelection_ << "\n";
 				tableSelect_ = false;
 				break;
 			}
@@ -268,7 +268,7 @@ void KoiKoi_Display::onMouseClick(int x, int y) {
 
 }
 
-array<int, 2> KoiKoi_Display::waitForSelection(const string& gamestate) {
+std::array<int, 2> KoiKoi_Display::waitForSelection(const std::string& gamestate) {
 	canSelect_ = true;
 	updateGamestate(gamestate);
 
@@ -276,7 +276,7 @@ array<int, 2> KoiKoi_Display::waitForSelection(const string& gamestate) {
 		refreshDisplay();
 	}
 
-	array<int, 2> res = { handSelection_, tableSelection_ };
+	std::array<int, 2> res = { handSelection_, tableSelection_ };
 	deselectHand();
 	deselectTable();
 	canSelect_ = false;
@@ -284,7 +284,7 @@ array<int, 2> KoiKoi_Display::waitForSelection(const string& gamestate) {
 	return res;
 }
 
-int KoiKoi_Display::waitForTableSelection(int tableMatch1, int tableMatch2, int handSelection, string message) {
+int KoiKoi_Display::waitForTableSelection(int tableMatch1, int tableMatch2, int handSelection, std::string message) {
 	canSelect_ = true;
 	tableSelect_ = true;
 	message_ = message;
@@ -307,7 +307,7 @@ int KoiKoi_Display::waitForTableSelection(int tableMatch1, int tableMatch2, int 
 	return res;
 }
 
-void KoiKoi_Display::pause(const string& gamestate) {
+void KoiKoi_Display::pause(const std::string& gamestate) {
 	updateGamestate(gamestate);
 
 	while (!IsKeyPressed(KEY_SPACE) && !IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
@@ -316,7 +316,7 @@ void KoiKoi_Display::pause(const string& gamestate) {
 
 }
 
-bool KoiKoi_Display::promptCallKoi(const string& gamestate) {
+bool KoiKoi_Display::promptCallKoi(const std::string& gamestate) {
 	callKoi_ = true;
 	canSelect_ = true;
 	updateGamestate(gamestate);
@@ -328,7 +328,7 @@ bool KoiKoi_Display::promptCallKoi(const string& gamestate) {
 	return callKoiChoice_;
 }
 
-int KoiKoi_Display::promptMatch(const string& card, int firstMatch, int secondMatch) {
+int KoiKoi_Display::promptMatch(const std::string& card, int firstMatch, int secondMatch) {
 	canSelect_ = true;
 	tableSelect_ = true;
 
@@ -343,7 +343,7 @@ int KoiKoi_Display::promptMatch(const string& card, int firstMatch, int secondMa
 	return -1;
 }
 
-void KoiKoi_Display::updateGamestate(const string& gamestate) {
+void KoiKoi_Display::updateGamestate(const std::string& gamestate) {
 
 	if (gamestate_.empty()) {
 		gamestate_ = gamestate;
@@ -353,17 +353,17 @@ void KoiKoi_Display::updateGamestate(const string& gamestate) {
 		return;
 	}
 
-	vector<string> currentPartitions;
+	std::vector<std::string> currentPartitions;
 	boost::split(currentPartitions, gamestate_, boost::is_any_of("/"), boost::algorithm::token_compress_mode_type::token_compress_off);
 
-	vector<string> updatedPartitions;
+	std::vector<std::string> updatedPartitions;
 	boost::split(updatedPartitions, gamestate, boost::is_any_of("/"), boost::algorithm::token_compress_mode_type::token_compress_off);
 
 
 	//------------------------------------------------------------------------------------------------------
 	// opp hand load textures
 	//------------------------------------------------------------------------------------------------------
-	cout << "Opp hand: " << updatedPartitions[0] << "\n";
+	std::cout << "Opp hand: " << updatedPartitions[0] << "\n";
 	if (currentPartitions[0] != updatedPartitions[0]) {
 		parseOpponentHand(updatedPartitions[0]);
 	}
@@ -372,7 +372,7 @@ void KoiKoi_Display::updateGamestate(const string& gamestate) {
 	//------------------------------------------------------------------------------------------------------
 	// opp played load textures
 	//------------------------------------------------------------------------------------------------------
-	cout << "Opp played: " << updatedPartitions[1] << "\n";
+	std::cout << "Opp played: " << updatedPartitions[1] << "\n";
 	if (currentPartitions[1] != updatedPartitions[1]) {
 		clearTextures(opponentPlayed_);
 		parsePlayed(updatedPartitions[1], opponentPlayBoxX, opponentPlayBoxY, opponentPlayed_);
@@ -383,7 +383,7 @@ void KoiKoi_Display::updateGamestate(const string& gamestate) {
 	//------------------------------------------------------------------------------------------------------
 	// player hand load textures
 	//------------------------------------------------------------------------------------------------------
-	cout << "Player hand: " << updatedPartitions[2] << "\n";
+	std::cout << "Player hand: " << updatedPartitions[2] << "\n";
 	if (currentPartitions[2] != updatedPartitions[2]) {
 		clearTextures(playerHandSelectable_);
 		parsePlayerHand(updatedPartitions[2]);
@@ -394,7 +394,7 @@ void KoiKoi_Display::updateGamestate(const string& gamestate) {
 	//------------------------------------------------------------------------------------------------------
 	// player played load textures
 	//------------------------------------------------------------------------------------------------------
-	cout << "Player played: " << updatedPartitions[3] << "\n";
+	std::cout << "Player played: " << updatedPartitions[3] << "\n";
 	if (currentPartitions[3] != updatedPartitions[3]) {
 		clearTextures(playerPlayed_);
 		parsePlayed(updatedPartitions[3], playerPlayBoxX, playerPlayBoxY, playerPlayed_);
@@ -405,7 +405,7 @@ void KoiKoi_Display::updateGamestate(const string& gamestate) {
 	//------------------------------------------------------------------------------------------------------
 	// table load textures
 	//------------------------------------------------------------------------------------------------------
-	cout << "Table: " << updatedPartitions[4] << "\n";
+	std::cout << "Table: " << updatedPartitions[4] << "\n";
 	if (currentPartitions[4] != updatedPartitions[4]) {
 		clearTextures(tableSelectable_);
 		parseTable(updatedPartitions[4]);
@@ -416,14 +416,14 @@ void KoiKoi_Display::updateGamestate(const string& gamestate) {
 	//------------------------------------------------------------------------------------------------------
 	// Opponent load points
 	//------------------------------------------------------------------------------------------------------
-	cout << "Opp pts: " << updatedPartitions[5] << "\n";
+	std::cout << "Opp pts: " << updatedPartitions[5] << "\n";
 	oppPts_ = stoi(updatedPartitions[5]);
 
 
 	//------------------------------------------------------------------------------------------------------
 	// Player load points
 	//------------------------------------------------------------------------------------------------------
-	cout << "Player pts: " << updatedPartitions[6] << "\n";
+	std::cout << "Player pts: " << updatedPartitions[6] << "\n";
 	playerPts_ = stoi(updatedPartitions[6]);
 
 
@@ -433,8 +433,8 @@ void KoiKoi_Display::updateGamestate(const string& gamestate) {
 	gamestate_ = gamestate;
 }
 
-void KoiKoi_Display::parsePlayerHand(string cards) {
-	deque<string> imgNames;
+void KoiKoi_Display::parsePlayerHand(std::string cards) {
+	std::deque<std::string> imgNames;
 
 	if (!cards.empty()) {
 		boost::split(imgNames, cards, boost::is_any_of(","), boost::algorithm::token_compress_mode_type::token_compress_on);
@@ -460,10 +460,10 @@ void KoiKoi_Display::parsePlayerHand(string cards) {
 
 }
 
-void KoiKoi_Display::parseTable(string cards) {
+void KoiKoi_Display::parseTable(std::string cards) {
 
 	if (!cards.empty()) {
-		deque<string> imgNames;
+		std::deque<std::string> imgNames;
 		boost::split(imgNames, cards, boost::is_any_of(","), boost::algorithm::token_compress_mode_type::token_compress_on);
 		bool row = 0;
 		float currentDisplacement = tableBoxX;
@@ -485,10 +485,10 @@ void KoiKoi_Display::parseTable(string cards) {
 
 }
 
-void KoiKoi_Display::parsePlayed(string& cards, float startX, float startY, vector<Hanafuda_Card_Texture>& into) const {
+void KoiKoi_Display::parsePlayed(std::string& cards, float startX, float startY, std::vector<Hanafuda_Card_Texture>& into) const {
 
 	if (!cards.empty()) {
-		deque<string> imgNames;
+		std::deque<std::string> imgNames;
 		boost::split(imgNames, cards, boost::is_any_of(","), boost::algorithm::token_compress_mode_type::token_compress_on);
 
 		float currentDisplacement = startX;

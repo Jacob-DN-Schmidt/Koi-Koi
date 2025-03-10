@@ -12,12 +12,12 @@
 class KoiKoi_Game_Handler {
 private:
 	struct KeyHasher {
-		std::size_t operator()(const string& flag) const {
-			return hash<string>()(flag);
+		std::size_t operator()(const std::string& flag) const {
+			return std::hash<std::string>()(flag);
 		}
 	};
 
-	static unordered_map<string, int, KeyHasher> flagMap;
+	static std::unordered_map<std::string, int, KeyHasher> flagMap;
 
 	enum flags {
 		hasOnoNoMichikaze = 6, hasFullMoon = 7, hasCurtain = 8,
@@ -25,7 +25,7 @@ private:
 		hasDeer = 12, hasButterfly = 13, countSakeAsJunk = 14
 	};
 
-	typedef array<int, 15> TabulationArray;
+	typedef std::array<int, 15> TabulationArray;
 	static TabulationArray tabulation;
 
 	static int junk() {
@@ -34,7 +34,7 @@ private:
 	};
 
 	static int ribbons() {
-		int val = tabulation[Tanzaku] + tabulation[Poetry] + tabulation[Blue] - 4 + 
+		int val = tabulation[Tanzaku] + tabulation[Poetry] + tabulation[Blue] - 4 +
 			(COUNT_RIBBON_SET_AS_FIVE && (tabulation[Poetry] == 3 || tabulation[Blue] == 3));
 		val *= (val > 0);
 		return val;
@@ -58,7 +58,7 @@ private:
 	};
 
 	static int allLights() {
-		int val = ((tabulation[Hikari] == 3 || tabulation[Hikari] == 4) && !tabulation[hasOnoNoMichikaze]) * (4 * tabulation[Hikari] - 8) + 
+		int val = ((tabulation[Hikari] == 3 || tabulation[Hikari] == 4) && !tabulation[hasOnoNoMichikaze]) * (4 * tabulation[Hikari] - 8) +
 			((tabulation[Hikari] == 4 || tabulation[Hikari] == 5) * tabulation[hasOnoNoMichikaze]) * (3 * tabulation[Hikari] - 5);
 		return val;
 	};
@@ -70,7 +70,7 @@ private:
 	};
 
 	// Kasu, tanzaku, poetry, blue, tane, hikari, hasOnoNoMichikaze, hasFullMoon, hasCurtain, hasSakeCup, hasLighting, hasBoar, hasDeer, hasButterfly, countSakeAsJunk
-	static void tabulate(const deque<Hanafuda_Card*> hand) {
+	static void tabulate(const std::deque<Hanafuda_Card*> hand) {
 		tabulation = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		int curFlag = -1;
 		Hanafuda_Card* temp;
@@ -93,14 +93,14 @@ public:
 	static bool CAN_COUNT_SAKE_AS_JUNK;
 	static bool TESHI_KUTTSUKI;
 
-	static int eval(const deque<Hanafuda_Card*> hand, bool opponentKoiKoi = false);
-	static bool promptYN(string question);
+	static int eval(const std::deque<Hanafuda_Card*> hand, bool opponentKoiKoi = false);
+	static bool promptYN(std::string question);
 	static int promptToDecideMatch(const int& one, const int& two);
-	static Hanafuda_Card* popCardAt(deque<Hanafuda_Card*>& from, int at);
-	static array<int, 12> tabulateMonths(const deque<Hanafuda_Card*>& hand);
-	static int teshiKuttsuki(const deque<Hanafuda_Card*>& hand);
+	static Hanafuda_Card* popCardAt(std::deque<Hanafuda_Card*>& from, int at);
+	static std::array<int, 12> tabulateMonths(const std::deque<Hanafuda_Card*>& hand);
+	static int teshiKuttsuki(const std::deque<Hanafuda_Card*>& hand);
 
-	static void deleteDequeContent(deque<Hanafuda_Card*>& target) {
+	static void deleteDequeContent(std::deque<Hanafuda_Card*>& target) {
 		for (int i = 0; i < target.size(); i++) {
 			delete target[i];
 		}
@@ -117,7 +117,7 @@ public:
 	};
 
 	// KOIKOI_DOUBLE_SCORE, SEVEN_POINTS_DOUBLE_SCORE, COUNT_RIBBON_SET_AS_FIVE, SPOIL_VIEWING, CAN_COUNT_SAKE_AS_JUNK
-	static void setGameRule(string ruleState) {
+	static void setGameRule(std::string ruleState) {
 		KOIKOI_DOUBLE_SCORE = ruleState.at(0) - 48;
 		SEVEN_POINTS_DOUBLE_SCORE = ruleState.at(1) - 48;
 		COUNT_RIBBON_SET_AS_FIVE = ruleState.at(2) - 48;
@@ -127,7 +127,7 @@ public:
 	};
 
 	static void printGameRule() {
-		cout << KOIKOI_DOUBLE_SCORE << SEVEN_POINTS_DOUBLE_SCORE << COUNT_RIBBON_SET_AS_FIVE << SPOIL_VIEWING << CAN_COUNT_SAKE_AS_JUNK << "\n";
+		std::cout << KOIKOI_DOUBLE_SCORE << SEVEN_POINTS_DOUBLE_SCORE << COUNT_RIBBON_SET_AS_FIVE << SPOIL_VIEWING << CAN_COUNT_SAKE_AS_JUNK << "\n";
 	}
 };
 #endif // !KOIKOI_GAME_HANDLER_H

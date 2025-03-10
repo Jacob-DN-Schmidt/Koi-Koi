@@ -1,3 +1,6 @@
+#define CONSOLE_DEBUG
+#define CONSOLE_PLAY
+
 #include "KoiKoi_Game.h"
 #include <climits>
 #include <fstream>

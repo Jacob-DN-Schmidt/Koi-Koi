@@ -10,29 +10,34 @@
 
 class Player {
 private:
-	deque<Hanafuda_Card*> hand_;
-	deque<Hanafuda_Card*> played_;
+	std::deque<Hanafuda_Card*> hand_;
+	std::deque<Hanafuda_Card*> played_;
 	int points_;
 public:
-	Player() :hand_(deque<Hanafuda_Card*>()), played_(deque<Hanafuda_Card*>()), points_(0) {};
+	Player() :hand_(std::deque<Hanafuda_Card*>()), played_(std::deque<Hanafuda_Card*>()), points_(0) {};
 	~Player();
 	Hanafuda_Card* playCard(int i);
 	void drawCard(Hanafuda_Deck& deck) { Hanafuda_Card::insert(deck.dealCard(), this->hand_); };
+
 	int calcPlayedCardsVal(bool opponentKoiKoi) const { return KoiKoi_Game_Handler::eval(this->played_, opponentKoiKoi); };
 	void addPoints(int pnts) { this->points_ += pnts; };
 	void addToPlayed(Hanafuda_Card* card) { Hanafuda_Card::insert(card, this->played_); };
-	deque<Hanafuda_Card*> getPlayed() const { return this->played_; };
-	deque<Hanafuda_Card*> getHand() const { return this->hand_; };
+	std::deque<Hanafuda_Card*> getPlayed() const { return this->played_; };
+	std::deque<Hanafuda_Card*> getHand() const { return this->hand_; };
 	Hanafuda_Card* getCardAt(int i) { return this->hand_[i]; };
 	int getPoints() const { return this->points_; };
 	size_t getHandSize() const { return this->hand_.size(); };
 	void clearCards();
 	void reset() { this->clearCards(); this->points_ = 0; };
+
+	std::string handImage() const;
+	std::string playedImage() const;
+
+#ifdef CONSOLE_DEBUG
 	Hanafuda_Card* promptToPlayCard();
-	string handToFormattedString() const;
-	string playedToFormattedString() const;
-	string handImage() const;
-	string playedImage() const;
+	std::string handToFormattedString() const;
+	std::string playedToFormattedString() const;
+#endif
 
 	/*string toFormattedString() {
 		string res = "";
@@ -44,15 +49,15 @@ public:
 		return res;
 	};*/
 
-	friend ostream& operator<<(ostream& os, Player& player) {
-		return os << player.handToFormattedString();
-	};
+	//friend ostream& operator<<(ostream& os, Player& player) {
+	//	return os << player.handToFormattedString();
+	//};
 
-	friend bool operator==(const Player& lhs, const Player& rhs) {
-		return lhs.hand_ == rhs.hand_ && lhs.played_ == rhs.played_ && lhs.points_ == rhs.points_;
-	};
-	friend bool operator!=(const Player& lhs, const Player& rhs) {
-		return !(lhs == rhs);
-	}
+	//friend bool operator==(const Player& lhs, const Player& rhs) {
+	//	return lhs.hand_ == rhs.hand_ && lhs.played_ == rhs.played_ && lhs.points_ == rhs.points_;
+	//};
+	//friend bool operator!=(const Player& lhs, const Player& rhs) {
+	//	return !(lhs == rhs);
+	//}
 };
 #endif // !PLAYER_H

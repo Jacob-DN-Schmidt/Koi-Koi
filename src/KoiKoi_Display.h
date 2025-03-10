@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 
-using namespace::std;
+
 using namespace::boost;
 
 //------------------------------------------------------------------------------------------------------
@@ -71,13 +71,13 @@ private:
 	class Hanafuda_Card_Texture {
 	public:
 
-		string imgID_;
+		std::string imgID_;
 		float x_;
 		float y_;
 		Texture2D texture_;
 
 		// Constructor: imgID(texture filename), x(left coord), y(top coord)
-		Hanafuda_Card_Texture(string imgID, float x, float y) : imgID_("Hanafuda Cards/" + imgID + ".png"), x_(x), y_(y), texture_() {};
+		Hanafuda_Card_Texture(std::string imgID, float x, float y) : imgID_("Hanafuda Cards/" + imgID + ".png"), x_(x), y_(y), texture_() {};
 		~Hanafuda_Card_Texture() {
 			this->unload();
 		};
@@ -113,7 +113,7 @@ private:
 		float hitboxHeight_;
 
 		// Constructor: imgID(texture filename), x(left coord), y(top coord), hbWidth(width of hitbox/texture shown), hbHeight(height of hitbox/texture shown)
-		Hanafuda_Card_Selectable_Texture(string imgID, float x, float y, float hbWidth, float hbHeight) : Hanafuda_Card_Texture(imgID, x, y), selected_(false), hitboxWidth_(hbWidth), hitboxHeight_(hbHeight) {};
+		Hanafuda_Card_Selectable_Texture(std::string imgID, float x, float y, float hbWidth, float hbHeight) : Hanafuda_Card_Texture(imgID, x, y), selected_(false), hitboxWidth_(hbWidth), hitboxHeight_(hbHeight) {};
 
 		void draw() const override {
 			if (selected_) {
@@ -159,18 +159,18 @@ private:
 	// Display Aspects
 	//------------------------------------------------------------------------------------------------------
 
-	string cardToMatch_ = "";
-	string message_ = "";
+	std::string cardToMatch_ = "";
+	std::string message_ = "";
 
-	string gamestate_ = "";
+	std::string gamestate_ = "";
 
 	int blanksToDraw = 0;
 
-	vector<Hanafuda_Card_Texture> opponentPlayed_;
-	vector<Hanafuda_Card_Texture> playerPlayed_;
+	std::vector<Hanafuda_Card_Texture> opponentPlayed_;
+	std::vector<Hanafuda_Card_Texture> playerPlayed_;
 
-	vector<Hanafuda_Card_Selectable_Texture> playerHandSelectable_;
-	vector<Hanafuda_Card_Selectable_Texture> tableSelectable_;
+	std::vector<Hanafuda_Card_Selectable_Texture> playerHandSelectable_;
+	std::vector<Hanafuda_Card_Selectable_Texture> tableSelectable_;
 
 	int playerPts_ = 0;
 	int oppPts_ = 0;
@@ -259,36 +259,36 @@ public:
 	// Operation flags - callKoi_, tableSelect_
 	void onMouseClick(int x, int y);
 	// Waits until one card in both the player's hand and on the table is selected and returns an array with the idex of the hand card followed by the index of the table card
-	array<int, 2> waitForSelection(const string& gamestate);
+	std::array<int, 2> waitForSelection(const std::string& gamestate);
 	// Waits until index of selected card on table matches one of match indexes and returns index 
-	int waitForTableSelection(int tableMatch1, int tableMatch2, int handSelection = -1, string message = "");
+	int waitForTableSelection(int tableMatch1, int tableMatch2, int handSelection = -1, std::string message = "");
 	// Waits until left mouse click or spacebar press
-	void pause(const string& gamestate);
+	void pause(const std::string& gamestate);
 	// Waits until player clicks yes or no
-	bool promptCallKoi(const string& gamestate);
+	bool promptCallKoi(const std::string& gamestate);
 	// Waits until selected card on table matches the specified card
-	int promptMatch(const string& card, int firstMatch, int secondMatch);	
+	int promptMatch(const std::string& card, int firstMatch, int secondMatch);
 
 
 	//------------------------------------------------------------------------------------------------------
 	// Texture Operations
 	//------------------------------------------------------------------------------------------------------
-	void updateGamestate(const string& gamestate);
+	void updateGamestate(const std::string& gamestate);
 
-	void parseOpponentHand(string numCards) {
+	void parseOpponentHand(std::string numCards) {
 		if (!numCards.empty()) {
 			blanksToDraw = stoi(numCards);
 		}
 	}
-	void parsePlayerHand(string cards);
-	void parseTable(string cards);
-	void parsePlayed(string& cards, float startX, float startY, vector<Hanafuda_Card_Texture>& into) const;
+	void parsePlayerHand(std::string cards);
+	void parseTable(std::string cards);
+	void parsePlayed(std::string& cards, float startX, float startY, std::vector<Hanafuda_Card_Texture>& into) const;
 	void parseAllGamestateAspects() {
 
-		vector<string> collections;
+		std::vector<std::string> collections;
 		boost::split(collections, gamestate_, boost::is_any_of("/"), boost::algorithm::token_compress_mode_type::token_compress_off);
 
-		deque<string> imgNames;
+		std::deque<std::string> imgNames;
 
 		//------------------------------------------------------------------------------------------------------
 		// opp hand load textures
@@ -327,12 +327,12 @@ public:
 		playerPts_ = stoi(collections[6]);
 	};
 
-	void loadGamestateAspect(vector<Hanafuda_Card_Texture>& aspect) {
+	void loadGamestateAspect(std::vector<Hanafuda_Card_Texture>& aspect) {
 		for (int i = 0; i < aspect.size(); i++) {
 			aspect[i].load();
 		}
 	}
-	void loadGamestateAspect(vector<Hanafuda_Card_Selectable_Texture>& aspect) {
+	void loadGamestateAspect(std::vector<Hanafuda_Card_Selectable_Texture>& aspect) {
 		for (int i = 0; i < aspect.size(); i++) {
 			aspect[i].load();
 		}
@@ -364,11 +364,11 @@ public:
 
 	};
 
-	void clearTextures(vector<Hanafuda_Card_Texture>& target) {
+	void clearTextures(std::vector<Hanafuda_Card_Texture>& target) {
 		for (int i = 0; i < target.size(); i++) target[i].unload();
 		target.clear();
 	}
-	void clearTextures(vector<Hanafuda_Card_Selectable_Texture>& target) {
+	void clearTextures(std::vector<Hanafuda_Card_Selectable_Texture>& target) {
 		for (int i = 0; i < target.size(); i++) target[i].unload();
 		target.clear();
 	}

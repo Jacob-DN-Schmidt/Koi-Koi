@@ -10,10 +10,10 @@
 #include <string>
 
 void Hanafuda_Deck::initializeFromFile() {
-	fstream CardInfo;
+	std::fstream CardInfo;
 	CardInfo.open("Hanafuda Cards/CardInfo.txt");
-	regex parseMultKasu("^/(\\d+);(\\d+)$", regex::ECMAScript);
-	string current;
+	std::regex parseMultKasu("^/(\\d+);(\\d+)$", std::regex::ECMAScript);
+	std::string current;
 
 	if (CardInfo.is_open()) {
 		while (getline(CardInfo, current)) {
@@ -33,7 +33,7 @@ void Hanafuda_Deck::initializeFromFile() {
 		}
 	}
 	else {
-		throw new exception("failed to open 'CardInfo.txt'");
+		throw new std::exception("failed to open 'CardInfo.txt'");
 	}
 }
 
@@ -70,9 +70,9 @@ void Hanafuda_Deck::reset() {
 	this->shuffle();
 }
 
-ostream& operator<<(ostream& os, Hanafuda_Deck& deck) {
+std::ostream& operator<<(std::ostream& os, Hanafuda_Deck& deck) {
 	if (deck.deck_.size() == 0) return os << "Deck is empty";
-	deque<Hanafuda_Card*>::iterator itr = deck.deck_.begin();
+	std::deque<Hanafuda_Card*>::iterator itr = deck.deck_.begin();
 	for (int i = 0; i < deck.deck_.size() - 1; i++, itr++) {
 		os << *itr << " | ";
 	}

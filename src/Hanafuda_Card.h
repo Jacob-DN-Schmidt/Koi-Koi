@@ -49,7 +49,7 @@ public:
 	bool match(const Hanafuda_Card* rhs) const { return this->month_ == rhs->month_; };
 	static void insert(Hanafuda_Card* card, std::deque<Hanafuda_Card*>& into);
 
-#ifdef CONSOLE_DEBUG
+#ifdef CONSOLE_PLAY
 	std::string toFormattedString() const {
 		if (this->name_.empty()) {
 			return Hanafuda_Card::monthArr[this->month_] + " " + Hanafuda_Card::suitArr[this->suit_];
@@ -64,7 +64,7 @@ public:
 	//friend std::ostream& operator<<(std::ostream& os, const Hanafuda_Card* card) {
 	//	return os << card->toFormattedString();
 	//};
-#endif // CONSOLE_DEBUG
+#endif // CONSOLE_PLAY
 
 };
 #endif // !HANAFUDA_CARD_H
