@@ -3,13 +3,13 @@ It is designed to reflect the info availible to the player whose turn it is whil
 Each entry (in and including the brackets; [*]) on each line is replaced by its respective value in the game where the active player is the player whose turn it is and the inactive player is the other player.
 Each line is followed by a forward slash ('/') with exception for the final line.
 Cards are in the format [month]_[suit] where: 
-	[month] is the numerical representation of the month the flower belongs to; Pine = January = 1, Plum Blossom = February = 2, Cherry Blossom = March = 3, Wisteria = April = 4, Iris = May = 5, Peony = June = 6, Bush Clover = July = 7, Susuki Grass = August = 8, Chrysanthemum = September = 9, Maple = October = 10, Willow = November = 11, Paulownia = December = 12
-	[suit] is the numerical representation of the suit; Kasu = 0, Tanzaku = 1, Akatan = 2, Aotan = 3, Hikari = 4
+	[month] is the numerical representation of the month the flower belongs to, beginning at 0; Pine = January = 0, Plum Blossom = February = 1, Cherry Blossom = March = 2, Wisteria = April = 3, Iris = May = 4, Peony = June = 5, Bush Clover = July = 6, Susuki Grass = August = 7, Chrysanthemum = September = 8, Maple = October = 9, Willow = November = 10, Paulownia = December = 11
+	[suit] is the numerical representation of the suit, beginning at 0; Kasu = 0, Tanzaku = 1, Akatan = 2, Aotan = 3, Tane = 4, Hikari = 5
 Lists of cards are delimited by commas (',')
 Comments are contained within curly braces ('{}') and shall not be included in the implementation.
 
 Example:
-1/
+3/0_0,2_5,6_4/
 
 [number of cards in inactive player hand]/
 [cards in inactive player played]/
