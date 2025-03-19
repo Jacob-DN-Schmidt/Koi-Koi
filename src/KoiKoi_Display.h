@@ -10,9 +10,8 @@
 #include <deque>
 #include <string>
 #include <vector>
+#include <iostream>
 
-
-using namespace::boost;
 
 //------------------------------------------------------------------------------------------------------
 // Float Enums
@@ -235,7 +234,7 @@ public:
 	void initiateWindow();
 	// Call when Display is meant to close; clears all textures out of vram
 	void closeWindow() {
-		clearTextures();
+		clearAllTextures();
 		unloadHighlight();
 		unloadBack();
 		CloseWindow();
@@ -327,26 +326,31 @@ public:
 		playerPts_ = stoi(collections[6]);
 	};
 
-	void loadGamestateAspect(std::vector<Hanafuda_Card_Texture>& aspect) {
+	// Loads all card textures in aspect into VRAM
+	void loadTextures(std::vector<Hanafuda_Card_Texture>& aspect) {
 		for (int i = 0; i < aspect.size(); i++) {
 			aspect[i].load();
 		}
 	}
-	void loadGamestateAspect(std::vector<Hanafuda_Card_Selectable_Texture>& aspect) {
+	// Loads all card textures in aspect into VRAM
+	void loadTextures(std::vector<Hanafuda_Card_Selectable_Texture>& aspect) {
 		for (int i = 0; i < aspect.size(); i++) {
 			aspect[i].load();
 		}
 	}
+	// Loads all necessary card textures
 	void loadGamestateAspect() {
-		loadGamestateAspect(opponentPlayed_);
-		loadGamestateAspect(playerPlayed_);
-		loadGamestateAspect(playerHandSelectable_);
-		loadGamestateAspect(tableSelectable_);
+		loadTextures(opponentPlayed_);
+		loadTextures(playerPlayed_);
+		loadTextures(playerHandSelectable_);
+		loadTextures(tableSelectable_);
 	}
 
+	// Sets card at index in table selected attribute to true
 	void selectTableAt(int index) {
 		tableSelectable_[index].selected_ = true;
 	};
+	// Deselects all cards in hand and sets hand selection index to -1
 	void deselectHand() {
 
 		for (int i = 0; i < playerHandSelectable_.size(); i++) {
@@ -355,6 +359,7 @@ public:
 		handSelection_ = -1;
 
 	};
+	// Deselects all cards in table and sets table selection to -1
 	void deselectTable() {
 
 		for (int i = 0; i < tableSelectable_.size(); i++) {
@@ -364,19 +369,21 @@ public:
 
 	};
 
-	void clearTextures(std::vector<Hanafuda_Card_Texture>& target) {
-		for (int i = 0; i < target.size(); i++) target[i].unload();
-		target.clear();
+	// Clears all card textures in aspect
+	void clearTextures(std::vector<Hanafuda_Card_Texture>& aspect) {
+		for (int i = 0; i < aspect.size(); i++) aspect[i].unload();
+		aspect.clear();
 	}
-	void clearTextures(std::vector<Hanafuda_Card_Selectable_Texture>& target) {
-		for (int i = 0; i < target.size(); i++) target[i].unload();
-		target.clear();
+	// Clears all card textures in aspect
+	void clearTextures(std::vector<Hanafuda_Card_Selectable_Texture>& aspect) {
+		for (int i = 0; i < aspect.size(); i++) aspect[i].unload();
+		aspect.clear();
 	}
-	void clearTextures() {
-		for (int i = 0; i < opponentPlayed_.size(); i++) opponentPlayed_[i].unload();
-		for (int i = 0; i < playerPlayed_.size(); i++) playerPlayed_[i].unload();
-		for (int i = 0; i < playerHandSelectable_.size(); i++) playerHandSelectable_[i].unload();
-		for (int i = 0; i < tableSelectable_.size(); i++) tableSelectable_[i].unload();
+	void clearAllTextures() {
+		clearTextures(opponentPlayed_);
+		clearTextures(playerPlayed_);
+		clearTextures(playerHandSelectable_);
+		clearTextures(tableSelectable_);
 		opponentPlayed_.clear();
 		playerPlayed_.clear();
 		playerHandSelectable_.clear();

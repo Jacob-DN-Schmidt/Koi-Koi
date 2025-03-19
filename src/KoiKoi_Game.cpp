@@ -146,7 +146,7 @@ void KoiKoi_Game::resetRound() {
 	this->players_[Player2].clearCards(); 
 	KoiKoi_Game_Handler::deleteDequeContent(this->table_); 
 	this->deck_.reset(); 
-	display_.clearTextures(); 
+	display_.clearAllTextures(); 
 	koiCalled[0] = false;
 	koiCalled[1] = false;
 }

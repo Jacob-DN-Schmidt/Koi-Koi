@@ -86,7 +86,9 @@ void KoiKoi_Display::initiateWindow() {
 	loadHighlight();
 	loadBack();
 
+#ifdef CONSOLE_DEBUG
 	std::cout << "width: " << screenWidth << " hight: " << screenHeight << " pbw: " << handBoxWidth << " pbh: " << playBoxHeight << " ps: " << paddingSide << " pt: " << paddingTop << "\n";
+#endif // CONSOLE_DEBUG
 }
 
 //------------------------------------------------------------------------------------------------------
@@ -226,11 +228,14 @@ void KoiKoi_Display::onMouseClick(int x, int y) {
 	}
 	else if (tableSelect_) {
 		for (int i = 0; i < tableSelectable_.size(); i++) {
+#ifdef CONSOLE_DEBUG
 			std::cout << std::to_string(tableSelectable_.size()) << " " << std::to_string(i) << "\n";
+#endif // CONSOLE_DEBUG
 			if (tableSelectable_[i].selected_ && tableSelectable_[i].checkClick(x, y)) {
-				std::cout << "Select Success ";
 				tableSelection_ = i;
-				std::cout << tableSelection_ << "\n";
+#ifdef CONSOLE_DEBUG
+				std::cout << "Select Success " << tableSelection_ << "\n";
+#endif // CONSOLE_DEBUG
 				tableSelect_ = false;
 				break;
 			}
@@ -347,7 +352,7 @@ void KoiKoi_Display::updateGamestate(const std::string& gamestate) {
 
 	if (gamestate_.empty()) {
 		gamestate_ = gamestate;
-		clearTextures();
+		clearAllTextures();
 		parseAllGamestateAspects();
 		loadGamestateAspect();
 		return;
@@ -363,7 +368,9 @@ void KoiKoi_Display::updateGamestate(const std::string& gamestate) {
 	//------------------------------------------------------------------------------------------------------
 	// opp hand load textures
 	//------------------------------------------------------------------------------------------------------
+#ifdef CONSOLE_DEBUG
 	std::cout << "Opp hand: " << updatedPartitions[0] << "\n";
+#endif // CONSOLE_DEBUG
 	if (currentPartitions[0] != updatedPartitions[0]) {
 		parseOpponentHand(updatedPartitions[0]);
 	}
@@ -372,58 +379,70 @@ void KoiKoi_Display::updateGamestate(const std::string& gamestate) {
 	//------------------------------------------------------------------------------------------------------
 	// opp played load textures
 	//------------------------------------------------------------------------------------------------------
+#ifdef CONSOLE_DEBUG
 	std::cout << "Opp played: " << updatedPartitions[1] << "\n";
+#endif // CONSOLE_DEBUG
 	if (currentPartitions[1] != updatedPartitions[1]) {
 		clearTextures(opponentPlayed_);
 		parsePlayed(updatedPartitions[1], opponentPlayBoxX, opponentPlayBoxY, opponentPlayed_);
-		loadGamestateAspect(opponentPlayed_);
+		loadTextures(opponentPlayed_);
 	}
 
 
 	//------------------------------------------------------------------------------------------------------
 	// player hand load textures
 	//------------------------------------------------------------------------------------------------------
+#ifdef CONSOLE_DEBUG
 	std::cout << "Player hand: " << updatedPartitions[2] << "\n";
+#endif // CONSOLE_DEBUG
 	if (currentPartitions[2] != updatedPartitions[2]) {
 		clearTextures(playerHandSelectable_);
 		parsePlayerHand(updatedPartitions[2]);
-		loadGamestateAspect(playerHandSelectable_);
+		loadTextures(playerHandSelectable_);
 	}
 
 
 	//------------------------------------------------------------------------------------------------------
 	// player played load textures
 	//------------------------------------------------------------------------------------------------------
+#ifdef CONSOLE_DEBUG
 	std::cout << "Player played: " << updatedPartitions[3] << "\n";
+#endif // CONSOLE_DEBUG
 	if (currentPartitions[3] != updatedPartitions[3]) {
 		clearTextures(playerPlayed_);
 		parsePlayed(updatedPartitions[3], playerPlayBoxX, playerPlayBoxY, playerPlayed_);
-		loadGamestateAspect(playerPlayed_);
+		loadTextures(playerPlayed_);
 	}
 
 
 	//------------------------------------------------------------------------------------------------------
 	// table load textures
 	//------------------------------------------------------------------------------------------------------
+#ifdef CONSOLE_DEBUG
 	std::cout << "Table: " << updatedPartitions[4] << "\n";
+#endif // CONSOLE_DEBUG
 	if (currentPartitions[4] != updatedPartitions[4]) {
 		clearTextures(tableSelectable_);
 		parseTable(updatedPartitions[4]);
-		loadGamestateAspect(tableSelectable_);
+		loadTextures(tableSelectable_);
 	}
 
 
 	//------------------------------------------------------------------------------------------------------
 	// Opponent load points
 	//------------------------------------------------------------------------------------------------------
+#ifdef CONSOLE_DEBUG
 	std::cout << "Opp pts: " << updatedPartitions[5] << "\n";
+#endif // CONSOLE_DEBUG
 	oppPts_ = stoi(updatedPartitions[5]);
 
 
 	//------------------------------------------------------------------------------------------------------
 	// Player load points
 	//------------------------------------------------------------------------------------------------------
+#ifdef CONSOLE_DEBUG
 	std::cout << "Player pts: " << updatedPartitions[6] << "\n";
+#endif // CONSOLE_DEBUG
 	playerPts_ = stoi(updatedPartitions[6]);
 
 
