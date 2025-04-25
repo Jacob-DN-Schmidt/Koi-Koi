@@ -59,6 +59,9 @@
     <ClInclude Include="src\KoiKoi_Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="KoiKoi_AI_Player.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Hanafuda Cards\CardInfo.txt">

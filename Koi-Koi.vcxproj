@@ -130,6 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="KoiKoi_AI_Player.h" />
     <ClInclude Include="src\Hanafuda_Card.h" />
     <ClInclude Include="src\Hanafuda_Deck.h" />
     <ClInclude Include="src\KoiKoi_Display.h" />
