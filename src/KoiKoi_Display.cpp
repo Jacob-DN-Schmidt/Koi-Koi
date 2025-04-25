@@ -245,6 +245,7 @@ void KoiKoi_Display::onMouseClick(int x, int y) {
 		for (int i = 0; i < playerHandSelectable_.size(); i++) {
 			if (playerHandSelectable_[i].checkClick(x, y)) {
 				playerHandSelectable_[i].select();
+
 				if (playerHandSelectable_[i].selected_) {
 					handSelection_ = i;
 				}
