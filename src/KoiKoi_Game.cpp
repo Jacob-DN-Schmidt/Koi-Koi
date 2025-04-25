@@ -115,7 +115,7 @@ void KoiKoi_Game::startRound() {
 				std::cout << current << "\nCurrent played cards value: " << to_string(currentHandEval) << "\n";
 #endif // CONSOLE_DEBUG
 
-				koiCalled[turn_] = display_.promptCallKoi(this->gamestate());
+				koiCalled[turn_] = current._selectCallKoi(display_, this->gamestate());
 
 				if (!koiCalled[turn_]) {
 					current.addPoints(currentHandEval);
@@ -145,23 +145,27 @@ void KoiKoi_Game::resetRound() {
 	this->players_[Player1].clearCards(); 
 	this->players_[Player2].clearCards(); 
 	KoiKoi_Game_Handler::deleteDequeContent(this->table_); 
-	this->deck_.reset(); 
-	display_.clearAllTextures(); 
+	this->deck_.reset();
+
+	display_.clearAllTextures();
+
 	koiCalled[0] = false;
 	koiCalled[1] = false;
 }
 
 void KoiKoi_Game::playerTurn() {
 	Player& player = players_[turn_];
-	std::array<int, 2> choices = display_.waitForSelection(this->gamestate());
+	std::array<int, 2> choices = player._selectMatch(display_, this->gamestate());
 	Hanafuda_Card* cardFromHand = player.playCard(choices[0]);
 	std::vector<int> matches = this->checkMatch(cardFromHand);
+
 	if (matches.size() == 0) {
 		Hanafuda_Card::insert(cardFromHand, this->table_);
 	}
 	else if (matches.size() == 3) {
 		player.addToPlayed(cardFromHand);
 		int nextIndex = nextMatch(cardFromHand);
+
 		while (nextIndex != -1) {
 			player.addToPlayed(KoiKoi_Game_Handler::popCardAt(this->table_, nextIndex));
 			nextIndex = nextMatch(cardFromHand);
@@ -169,10 +173,16 @@ void KoiKoi_Game::playerTurn() {
 	}
 	else if (matches.size() == 2) {
 		player.addToPlayed(cardFromHand);
-		int tempChoice = choices[1];
-		display_.waitForTableSelection(matches[0], matches[1], choices[0]);
+		int tempChoice;
 
-		player.addToPlayed(KoiKoi_Game_Handler::popCardAt(this->table_, choices[1]));
+		if (cardFromHand->match(this->table_[choices[1]])) {
+			tempChoice = choices[1];
+		}
+		else {
+			tempChoice = player._selectPairMatch(display_, matches[0], matches[1], choices[0]);
+		}
+
+		player.addToPlayed(KoiKoi_Game_Handler::popCardAt(this->table_, tempChoice));
 	}
 	else {
 		player.addToPlayed(cardFromHand);
@@ -210,7 +220,7 @@ void KoiKoi_Game::drawFromDeck() {
 	}
 	else if (matches.size() == 2) {
 		player.addToPlayed(temp);
-		int ans = display_.waitForTableSelection(matches[0], matches[1]);
+		int ans = player._selectPairMatch(display_, matches[0], matches[1]);
 		player.addToPlayed(KoiKoi_Game_Handler::popCardAt(this->table_, ans));
 	}
 	else {
