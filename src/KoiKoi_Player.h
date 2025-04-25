@@ -4,6 +4,7 @@
 #include "Hanafuda_Card.h"
 #include "Hanafuda_Deck.h"
 #include "KoiKoi_Game_Handler.h"
+#include "KoiKoi_Display.h"
 #include <deque>
 #include <iosfwd>
 #include <string>
@@ -32,6 +33,18 @@ public:
 
 	std::string handImage() const;
 	std::string playedImage() const;
+
+	bool _selectCallKoi(KoiKoi_Display& display, std::string gamestate) {
+		return display.promptCallKoi(gamestate);
+	}
+
+	int _selectPairMatch(KoiKoi_Display& display, int firstPair, int secondPair, int handSelection = -1) {
+		return display.waitForTableSelection(firstPair, secondPair, handSelection);
+	}
+
+	std::array<int, 2> _selectMatch(KoiKoi_Display& display, std::string gamestate) {
+		return display.waitForSelection(gamestate);
+	}
 
 #ifdef CONSOLE_DEBUG
 	Hanafuda_Card* promptToPlayCard();
