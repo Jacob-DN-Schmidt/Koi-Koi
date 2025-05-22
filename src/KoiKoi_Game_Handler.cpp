@@ -32,6 +32,7 @@ int KoiKoi_Game_Handler::eval(const std::deque<Hanafuda_Card*> hand, bool oppone
 	return score;
 }
 
+#ifdef CONSOLE_PLAY
 bool KoiKoi_Game_Handler::promptYN(std::string question) {
 	std::cout << question << ": y|n?\n";
 	std::string ans = "";
@@ -55,6 +56,7 @@ int KoiKoi_Game_Handler::promptToDecideMatch(const int& one, const int& two) {
 		}
 	}
 }
+#endif // CONSOLE_PLAY
 
 Hanafuda_Card* KoiKoi_Game_Handler::popCardAt(std::deque<Hanafuda_Card*>& from, int at) {
 	std::deque<Hanafuda_Card*>::iterator itr = from.begin() + at;

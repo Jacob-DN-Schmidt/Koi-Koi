@@ -7,7 +7,7 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
-#include <utility>
+#include <type_traits>
 
 class KoiKoi_Game_Handler {
 private:
@@ -80,9 +80,11 @@ private:
 			curFlag = flagMap[temp->getName()];
 			if (curFlag != -1) tabulation[curFlag] = true;
 		}
+#ifdef CONSOLE_PLAY
 		if (tabulation[hasSakeCup] && tabulation[Kasu] >= 9 && CAN_COUNT_SAKE_AS_JUNK) {
 			tabulation[countSakeAsJunk] = promptYN("Count Sake Cup as Junk"); //todo
 		}
+#endif // CONSOLE_PLAY
 	}
 
 public:
@@ -94,8 +96,10 @@ public:
 	static bool TESHI_KUTTSUKI;
 
 	static int eval(const std::deque<Hanafuda_Card*> hand, bool opponentKoiKoi = false);
+#ifdef CONSOLE_PLAY
 	static bool promptYN(std::string question);
 	static int promptToDecideMatch(const int& one, const int& two);
+#endif // CONSOLE_PLAY
 	static Hanafuda_Card* popCardAt(std::deque<Hanafuda_Card*>& from, int at);
 	static std::array<int, 12> tabulateMonths(const std::deque<Hanafuda_Card*>& hand);
 	static int teshiKuttsuki(const std::deque<Hanafuda_Card*>& hand);
