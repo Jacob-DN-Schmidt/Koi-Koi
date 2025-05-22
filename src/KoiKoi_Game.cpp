@@ -11,6 +11,10 @@
 #include <iostream>
 #endif // CONSOLE_DEBUG
 
+
+//------------------------------------------------------------------------------------------------------
+// Game Flow Logic
+//------------------------------------------------------------------------------------------------------
 void KoiKoi_Game::startGame() {
 	KoiKoi_Game_Handler::setGameRule(this->ruleset_);
 
@@ -189,6 +193,11 @@ void KoiKoi_Game::playerTurn() {
 		player.addToPlayed(KoiKoi_Game_Handler::popCardAt(this->table_, matches[0]));
 	}
 }
+
+
+//------------------------------------------------------------------------------------------------------
+// Game Actions
+//------------------------------------------------------------------------------------------------------
 
 void KoiKoi_Game::drawFromDeck() {
 
