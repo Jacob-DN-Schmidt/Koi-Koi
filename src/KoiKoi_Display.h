@@ -38,6 +38,20 @@ namespace KoiKoi_Display_Enums {
 
 class KoiKoi_Display {
 private:
+	//------------------------------------------------------------------------------------------------------
+	// Card Texture Preloading
+	//------------------------------------------------------------------------------------------------------
+	struct IDTexture {
+	public:
+		std::string imageID_;
+		Texture2D texture_;
+
+		IDTexture(std::string imageID) : imageID_(imageID), texture_() { texture_ = LoadTexture(("Hanafuda Cards/" + imageID_ + ".png").c_str()); };
+	};
+
+	std::vector<IDTexture> preloadedCardTextures;
+
+	Texture2D& getPreloadedCardTexture(std::string& imageID);
 
 	//------------------------------------------------------------------------------------------------------
 	// Card Highlight/Back Textures
@@ -73,21 +87,21 @@ private:
 		std::string imgID_;
 		float x_;
 		float y_;
-		Texture2D texture_;
+		Texture2D& texture_;
 
 		// Constructor: imgID(texture filename), x(left coord), y(top coord)
-		Hanafuda_Card_Texture(std::string imgID, float x, float y) : imgID_("Hanafuda Cards/" + imgID + ".png"), x_(x), y_(y), texture_() {};
-		~Hanafuda_Card_Texture() {
-			this->unload();
-		};
-		// Loads card texture into vram; should only be called after display initiation
-		void load() {
-			texture_ = LoadTexture(imgID_.c_str());
-		};
-		// Unloads card texture 
-		void unload() const {
-			UnloadTexture(texture_);
-		};
+		Hanafuda_Card_Texture(std::string imgID, float x, float y, Texture2D& texture) : imgID_("Hanafuda Cards/" + imgID + ".png"), x_(x), y_(y), texture_(texture) {};
+		//~Hanafuda_Card_Texture() {
+		//	this->unload();
+		//};
+		//// Loads card texture into vram; should only be called after display initiation
+		//void load() {
+		//	texture_ = LoadTexture(imgID_.c_str());
+		//};
+		//// Unloads card texture 
+		//void unload() const {
+		//	UnloadTexture(texture_);
+		//};
 		// Draws card texture; should only be called while in drawing mode loop
 		virtual void draw() const {
 			DrawTexture(texture_, (int) x_, (int) y_, WHITE);
@@ -112,7 +126,7 @@ private:
 		float hitboxHeight_;
 
 		// Constructor: imgID(texture filename), x(left coord), y(top coord), hbWidth(width of hitbox/texture shown), hbHeight(height of hitbox/texture shown)
-		Hanafuda_Card_Selectable_Texture(std::string imgID, float x, float y, float hbWidth, float hbHeight) : Hanafuda_Card_Texture(imgID, x, y), selected_(false), hitboxWidth_(hbWidth), hitboxHeight_(hbHeight) {};
+		Hanafuda_Card_Selectable_Texture(std::string imgID, float x, float y, Texture2D& texture, float hbWidth, float hbHeight) : Hanafuda_Card_Texture(imgID, x, y, texture), selected_(false), hitboxWidth_(hbWidth), hitboxHeight_(hbHeight) {};
 
 		void draw() const override {
 			if (selected_) {
@@ -281,7 +295,7 @@ public:
 	}
 	void parsePlayerHand(std::string cards);
 	void parseTable(std::string cards);
-	void parsePlayed(std::string& cards, float startX, float startY, std::vector<Hanafuda_Card_Texture>& into) const;
+	void parsePlayed(std::string& cards, float startX, float startY, std::vector<Hanafuda_Card_Texture>& into);
 	void parseAllGamestateAspects() {
 
 		std::vector<std::string> collections;
@@ -326,25 +340,25 @@ public:
 		playerPts_ = stoi(collections[6]);
 	};
 
-	// Loads all card textures in aspect into VRAM
-	void loadTextures(std::vector<Hanafuda_Card_Texture>& aspect) {
-		for (int i = 0; i < aspect.size(); i++) {
-			aspect[i].load();
-		}
-	}
-	// Loads all card textures in aspect into VRAM
-	void loadTextures(std::vector<Hanafuda_Card_Selectable_Texture>& aspect) {
-		for (int i = 0; i < aspect.size(); i++) {
-			aspect[i].load();
-		}
-	}
-	// Loads all necessary card textures
-	void loadGamestateAspect() {
-		loadTextures(opponentPlayed_);
-		loadTextures(playerPlayed_);
-		loadTextures(playerHandSelectable_);
-		loadTextures(tableSelectable_);
-	}
+	//// Loads all card textures in aspect into VRAM
+	//void loadTextures(std::vector<Hanafuda_Card_Texture>& aspect) {
+	//	for (int i = 0; i < aspect.size(); i++) {
+	//		aspect[i].load();
+	//	}
+	//}
+	//// Loads all card textures in aspect into VRAM
+	//void loadTextures(std::vector<Hanafuda_Card_Selectable_Texture>& aspect) {
+	//	for (int i = 0; i < aspect.size(); i++) {
+	//		aspect[i].load();
+	//	}
+	//}
+	//// Loads all necessary card textures
+	//void loadGamestateAspect() {
+	//	loadTextures(opponentPlayed_);
+	//	loadTextures(playerPlayed_);
+	//	loadTextures(playerHandSelectable_);
+	//	loadTextures(tableSelectable_);
+	//}
 
 	// Sets card at index in table selected attribute to true
 	void selectTableAt(int index) {
@@ -370,20 +384,16 @@ public:
 	};
 
 	// Clears all card textures in aspect
-	void clearTextures(std::vector<Hanafuda_Card_Texture>& aspect) {
-		for (int i = 0; i < aspect.size(); i++) aspect[i].unload();
-		aspect.clear();
-	}
-	// Clears all card textures in aspect
-	void clearTextures(std::vector<Hanafuda_Card_Selectable_Texture>& aspect) {
-		for (int i = 0; i < aspect.size(); i++) aspect[i].unload();
-		aspect.clear();
-	}
+	//void clearTextures(std::vector<Hanafuda_Card_Texture>& aspect) {
+	//	for (int i = 0; i < aspect.size(); i++) aspect[i].unload();
+	//	aspect.clear();
+	//}
+	//// Clears all card textures in aspect
+	//void clearTextures(std::vector<Hanafuda_Card_Selectable_Texture>& aspect) {
+	//	for (int i = 0; i < aspect.size(); i++) aspect[i].unload();
+	//	aspect.clear();
+	//}
 	void clearAllTextures() {
-		clearTextures(opponentPlayed_);
-		clearTextures(playerPlayed_);
-		clearTextures(playerHandSelectable_);
-		clearTextures(tableSelectable_);
 		opponentPlayed_.clear();
 		playerPlayed_.clear();
 		playerHandSelectable_.clear();

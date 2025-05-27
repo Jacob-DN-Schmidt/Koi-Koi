@@ -7,16 +7,31 @@
 #include <cstdlib>
 #include <deque>
 #include <iostream>
+#include <regex>
 #include <string>
 #include <vector>
 
 using namespace::KoiKoi_Display_Enums;
+
+
+//------------------------------------------------------------------------------------------------------
+// Card Texture Preloading
+//------------------------------------------------------------------------------------------------------
+Texture2D& KoiKoi_Display::getPreloadedCardTexture(std::string& imageID) {
+	for (std::size_t i = 0; i < preloadedCardTextures.size(); i++) {
+		if (preloadedCardTextures[i].imageID_ == imageID) {
+			return preloadedCardTextures[i].texture_;
+		}
+	}
+}
+
 
 //------------------------------------------------------------------------------------------------------
 // Card Highlight/Back Textures
 //------------------------------------------------------------------------------------------------------
 Texture2D KoiKoi_Display::highlightTexture;
 Texture2D KoiKoi_Display::back_;
+
 
 //------------------------------------------------------------------------------------------------------
 // Card Highlight/Back Operations
@@ -36,6 +51,7 @@ void KoiKoi_Display::loadBack() {
 void KoiKoi_Display::unloadBack() {
 	UnloadTexture(back_);
 }
+
 
 //------------------------------------------------------------------------------------------------------
 // Window Operations
@@ -86,10 +102,21 @@ void KoiKoi_Display::initiateWindow() {
 	loadHighlight();
 	loadBack();
 
+	std::regex imagePattern(".*\\.png$", std::regex::ECMAScript);
+
+	FilePathList list = LoadDirectoryFiles("Hanafuda Cards");
+	for (int i = 0; i < list.count; i++) {
+		if (std::regex_match(GetFileName(list.paths[i]), imagePattern)) {
+			std::cout << "\nTexture " << i << ": ";
+			preloadedCardTextures.push_back(IDTexture(GetFileNameWithoutExt(list.paths[i])));
+		}
+	}
+
 #ifdef CONSOLE_DEBUG
 	std::cout << "width: " << screenWidth << " hight: " << screenHeight << " pbw: " << handBoxWidth << " pbh: " << playBoxHeight << " ps: " << paddingSide << " pt: " << paddingTop << "\n";
 #endif // CONSOLE_DEBUG
 }
+
 
 //------------------------------------------------------------------------------------------------------
 // Drawing Operations
@@ -209,6 +236,10 @@ void KoiKoi_Display::refreshDisplay() {
 	EndDrawing();
 
 	if (WindowShouldClose()) {
+		for (std::size_t i = 0; i < preloadedCardTextures.size(); i++) {
+			UnloadTexture(preloadedCardTextures[i].texture_);
+		}
+		preloadedCardTextures.clear();
 		this->closeWindow();
 		exit(EXIT_SUCCESS);
 	}
@@ -355,7 +386,6 @@ void KoiKoi_Display::updateGamestate(const std::string& gamestate) {
 		gamestate_ = gamestate;
 		clearAllTextures();
 		parseAllGamestateAspects();
-		loadGamestateAspect();
 		return;
 	}
 
@@ -384,9 +414,8 @@ void KoiKoi_Display::updateGamestate(const std::string& gamestate) {
 	std::cout << "Opp played: " << updatedPartitions[1] << "\n";
 #endif // CONSOLE_DEBUG
 	if (currentPartitions[1] != updatedPartitions[1]) {
-		clearTextures(opponentPlayed_);
+		opponentPlayed_.clear();
 		parsePlayed(updatedPartitions[1], opponentPlayBoxX, opponentPlayBoxY, opponentPlayed_);
-		loadTextures(opponentPlayed_);
 	}
 
 
@@ -397,9 +426,8 @@ void KoiKoi_Display::updateGamestate(const std::string& gamestate) {
 	std::cout << "Player hand: " << updatedPartitions[2] << "\n";
 #endif // CONSOLE_DEBUG
 	if (currentPartitions[2] != updatedPartitions[2]) {
-		clearTextures(playerHandSelectable_);
+		playerHandSelectable_.clear();
 		parsePlayerHand(updatedPartitions[2]);
-		loadTextures(playerHandSelectable_);
 	}
 
 
@@ -410,9 +438,8 @@ void KoiKoi_Display::updateGamestate(const std::string& gamestate) {
 	std::cout << "Player played: " << updatedPartitions[3] << "\n";
 #endif // CONSOLE_DEBUG
 	if (currentPartitions[3] != updatedPartitions[3]) {
-		clearTextures(playerPlayed_);
+		playerPlayed_.clear();
 		parsePlayed(updatedPartitions[3], playerPlayBoxX, playerPlayBoxY, playerPlayed_);
-		loadTextures(playerPlayed_);
 	}
 
 
@@ -423,9 +450,8 @@ void KoiKoi_Display::updateGamestate(const std::string& gamestate) {
 	std::cout << "Table: " << updatedPartitions[4] << "\n";
 #endif // CONSOLE_DEBUG
 	if (currentPartitions[4] != updatedPartitions[4]) {
-		clearTextures(tableSelectable_);
+		tableSelectable_.clear();
 		parseTable(updatedPartitions[4]);
-		loadTextures(tableSelectable_);
 	}
 
 
@@ -470,11 +496,11 @@ void KoiKoi_Display::parsePlayerHand(std::string cards) {
 			}
 
 			for (int i = 0; i < imgNames.size() - 1; i++) {
-				playerHandSelectable_.push_back(Hanafuda_Card_Selectable_Texture(imgNames[i], currentDisplacement, playerHandBoxY, hbWidth, cheight));
+				playerHandSelectable_.push_back(Hanafuda_Card_Selectable_Texture(imgNames[i], currentDisplacement, playerHandBoxY, getPreloadedCardTexture(imgNames[i]), hbWidth, cheight));
 				currentDisplacement += dx;
 			}
 		}
-		playerHandSelectable_.push_back(Hanafuda_Card_Selectable_Texture(imgNames.back(), currentDisplacement, playerHandBoxY, cwidth, cheight));
+		playerHandSelectable_.push_back(Hanafuda_Card_Selectable_Texture(imgNames.back(), currentDisplacement, playerHandBoxY, getPreloadedCardTexture(imgNames.back()), cwidth, cheight));
 		imgNames.clear();
 	}
 
@@ -496,7 +522,7 @@ void KoiKoi_Display::parseTable(std::string cards) {
 		float dy = ((paddingTop * 2) + cheight);
 
 		for (int i = 0; i < imgNames.size(); i++) {
-			tableSelectable_.push_back(Hanafuda_Card_Selectable_Texture(imgNames[i], currentDisplacement, (tableBoxY + (row * dy)), hbWidth, cheight));
+			tableSelectable_.push_back(Hanafuda_Card_Selectable_Texture(imgNames[i], currentDisplacement, (tableBoxY + (row * dy)), getPreloadedCardTexture(imgNames[i]), hbWidth, cheight));
 			if (row) currentDisplacement += dx;
 			row = !row;
 		}
@@ -505,7 +531,7 @@ void KoiKoi_Display::parseTable(std::string cards) {
 
 }
 
-void KoiKoi_Display::parsePlayed(std::string& cards, float startX, float startY, std::vector<Hanafuda_Card_Texture>& into) const {
+void KoiKoi_Display::parsePlayed(std::string& cards, float startX, float startY, std::vector<Hanafuda_Card_Texture>& into) {
 
 	if (!cards.empty()) {
 		std::deque<std::string> imgNames;
@@ -515,7 +541,8 @@ void KoiKoi_Display::parsePlayed(std::string& cards, float startX, float startY,
 		bool hadJunk = false;
 
 		while (imgNames.size() != 0 && imgNames.front().front() == 'J') {
-			into.push_back(Hanafuda_Card_Texture(imgNames.front().substr(1, imgNames.front().size()), currentDisplacement, startY));
+			std::string temp = imgNames.front().substr(1, imgNames.front().size());
+			into.push_back(Hanafuda_Card_Texture(temp, currentDisplacement, startY, getPreloadedCardTexture(temp)));
 			currentDisplacement += 15;
 			imgNames.pop_front();
 			hadJunk = true;
@@ -535,11 +562,11 @@ void KoiKoi_Display::parsePlayed(std::string& cards, float startX, float startY,
 				}
 
 				for (int i = 0; i < imgNames.size() - 1; i++) {
-					into.push_back(Hanafuda_Card_Texture(imgNames[i], currentDisplacement, startY));
+					into.push_back(Hanafuda_Card_Texture(imgNames[i], currentDisplacement, startY, getPreloadedCardTexture(imgNames[i])));
 					currentDisplacement += dx;
 				}
 			}
-			into.push_back(Hanafuda_Card_Texture(imgNames.back(), currentDisplacement, startY));
+			into.push_back(Hanafuda_Card_Texture(imgNames.back(), currentDisplacement, startY, getPreloadedCardTexture(imgNames.back())));
 			imgNames.clear();
 		}
 	}
