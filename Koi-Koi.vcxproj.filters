@@ -16,6 +16,12 @@
     <Filter Include="Resource Files\Hanafuda Cards">
       <UniqueIdentifier>{ffc8b9f4-c5a3-461e-943f-9b14646e4bbf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Probability Calc">
+      <UniqueIdentifier>{1269b0a6-18b3-4a9a-a2ec-e2687b994d09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Probability Calc">
+      <UniqueIdentifier>{7af76dc2-cf4d-43eb-aa8e-eb804a35cb45}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hanafuda_Card.cpp">
@@ -39,6 +45,9 @@
     <ClCompile Include="src\KoiKoi_Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="KoiKoi_Probability_Eval.cpp">
+      <Filter>Source Files\Probability Calc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Hanafuda_Card.h">
@@ -61,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="KoiKoi_AI_Player.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KoiKoi_Probability_Eval.h">
+      <Filter>Header Files\Probability Calc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
