@@ -480,7 +480,7 @@ void KoiKoi_Display::updateGamestate(const std::string& gamestate) {
 }
 
 void KoiKoi_Display::parsePlayerHand(std::string cards) {
-	std::deque<std::string> imgNames;
+	std::vector<std::string> imgNames;
 
 	if (!cards.empty()) {
 		boost::split(imgNames, cards, boost::is_any_of(","), boost::algorithm::token_compress_mode_type::token_compress_on);
@@ -509,7 +509,7 @@ void KoiKoi_Display::parsePlayerHand(std::string cards) {
 void KoiKoi_Display::parseTable(std::string cards) {
 
 	if (!cards.empty()) {
-		std::deque<std::string> imgNames;
+		std::vector<std::string> imgNames;
 		boost::split(imgNames, cards, boost::is_any_of(","), boost::algorithm::token_compress_mode_type::token_compress_on);
 		bool row = 0;
 		float currentDisplacement = tableBoxX;

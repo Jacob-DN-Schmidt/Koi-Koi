@@ -301,8 +301,6 @@ public:
 		std::vector<std::string> collections;
 		boost::split(collections, gamestate_, boost::is_any_of("/"), boost::algorithm::token_compress_mode_type::token_compress_off);
 
-		std::deque<std::string> imgNames;
-
 		//------------------------------------------------------------------------------------------------------
 		// opp hand load textures
 		//------------------------------------------------------------------------------------------------------
