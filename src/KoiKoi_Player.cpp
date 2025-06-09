@@ -13,6 +13,7 @@ Player::~Player() {
 	for (int i = 0; i < this->played_.size(); i++) {
 		delete this->played_[i];
 	}
+	this->display_ = nullptr;
 	this->played_.~deque();
 }
 

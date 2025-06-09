@@ -8,14 +8,16 @@
 #include <deque>
 #include <iosfwd>
 #include <string>
+#include <array>
 
 class Player {
 private:
+	KoiKoi_Display* display_;
 	std::deque<Hanafuda_Card*> hand_;
 	std::deque<Hanafuda_Card*> played_;
 	int points_;
 public:
-	Player() :hand_(std::deque<Hanafuda_Card*>()), played_(std::deque<Hanafuda_Card*>()), points_(0) {};
+	Player() : display_(nullptr), hand_(std::deque<Hanafuda_Card*>()), played_(std::deque<Hanafuda_Card*>()), points_(0) {};
 	~Player();
 	Hanafuda_Card* playCard(int i);
 	void drawCard(Hanafuda_Deck& deck) { Hanafuda_Card::insert(deck.dealCard(), this->hand_); };
@@ -28,22 +30,23 @@ public:
 	Hanafuda_Card* getCardAt(int i) { return this->hand_[i]; };
 	int getPoints() const { return this->points_; };
 	size_t getHandSize() const { return this->hand_.size(); };
+	void setDisplay(KoiKoi_Display* display) { this->display_ = display; };
 	void clearCards();
 	void reset() { this->clearCards(); this->points_ = 0; };
 
 	std::string handImage() const;
 	std::string playedImage() const;
 
-	bool _selectCallKoi(KoiKoi_Display& display, std::string gamestate) {
-		return display.promptCallKoi(gamestate);
+	bool _selectCallKoi(std::string gamestate) {
+		return display_->promptCallKoi(gamestate);
 	}
 
-	int _selectPairMatch(KoiKoi_Display& display, int firstPair, int secondPair, int handSelection = -1) {
-		return display.waitForTableSelection(firstPair, secondPair, handSelection);
+	int _selectPairMatch(int firstPair, int secondPair, int handSelection = -1) {
+		return display_->waitForTableSelection(firstPair, secondPair, handSelection);
 	}
 
-	std::array<int, 2> _selectMatch(KoiKoi_Display& display, std::string gamestate) {
-		return display.waitForSelection(gamestate);
+	std::array<int, 2> _selectMatch(std::string gamestate) {
+		return display_->waitForSelection(gamestate);
 	}
 
 #ifdef CONSOLE_DEBUG

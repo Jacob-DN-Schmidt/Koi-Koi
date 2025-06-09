@@ -119,7 +119,7 @@ void KoiKoi_Game::startRound() {
 				std::cout << current << "\nCurrent played cards value: " << to_string(currentHandEval) << "\n";
 #endif // CONSOLE_DEBUG
 
-				koiCalled[turn_] = current._selectCallKoi(display_, this->gamestate());
+				koiCalled[turn_] = current._selectCallKoi(this->gamestate());
 
 				if (!koiCalled[turn_]) {
 					current.addPoints(currentHandEval);
@@ -159,7 +159,7 @@ void KoiKoi_Game::resetRound() {
 
 void KoiKoi_Game::playerTurn() {
 	Player& player = players_[turn_];
-	std::array<int, 2> choices = player._selectMatch(display_, this->gamestate());
+	std::array<int, 2> choices = player._selectMatch(this->gamestate());
 	Hanafuda_Card* cardFromHand = player.playCard(choices[0]);
 	std::vector<int> matches = this->checkMatch(cardFromHand);
 
@@ -183,7 +183,7 @@ void KoiKoi_Game::playerTurn() {
 			tempChoice = choices[1];
 		}
 		else {
-			tempChoice = player._selectPairMatch(display_, matches[0], matches[1], choices[0]);
+			tempChoice = player._selectPairMatch(matches[0], matches[1], choices[0]);
 		}
 
 		player.addToPlayed(KoiKoi_Game_Handler::popCardAt(this->table_, tempChoice));
@@ -229,7 +229,7 @@ void KoiKoi_Game::drawFromDeck() {
 	}
 	else if (matches.size() == 2) {
 		player.addToPlayed(temp);
-		int ans = player._selectPairMatch(display_, matches[0], matches[1]);
+		int ans = player._selectPairMatch(matches[0], matches[1]);
 		player.addToPlayed(KoiKoi_Game_Handler::popCardAt(this->table_, ans));
 	}
 	else {

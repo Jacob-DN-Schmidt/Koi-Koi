@@ -61,7 +61,7 @@ public:
 	//------------------------------------------------------------------------------------------------------
 
 	// KOIKOI_DOUBLE_SCORE, SEVEN_POINTS_DOUBLE_SCORE, COUNT_RIBBON_SET_AS_FIVE, SPOIL_VIEWING, CAN_COUNT_SAKE_AS_JUNK, TESHI_KUTTSUKI
-	KoiKoi_Game(int rounds = 6, std::string ruleset = "110011") : rounds_(rounds), ruleset_(ruleset), players_(), deck_(Hanafuda_Deck()), table_(std::deque<Hanafuda_Card*>()), turn_(rand() % 2), oya_(false), display_() { this->deck_.shuffle(); display_.initiateWindow(); };
+	KoiKoi_Game(int rounds = 6, std::string ruleset = "110011") : rounds_(rounds), ruleset_(ruleset), players_(), deck_(Hanafuda_Deck()), table_(std::deque<Hanafuda_Card*>()), turn_(rand() % 2), oya_(false), display_() { this->deck_.shuffle(); display_.initiateWindow(); players_[Player1].setDisplay(&display_); players_[Player2].setDisplay(&display_); };
 	// Starts a new game of Koi-Koi using a predefined ruleset and number of rounds
 	void startGame();
 	// Starts a new round of Koi-Koi by dealing out cards
