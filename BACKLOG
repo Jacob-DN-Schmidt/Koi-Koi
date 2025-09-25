@@ -6,7 +6,7 @@ Add additional game information messages
 Med priority:
 Alter card texture file names to be more readable
 Alter current game logic to be interfaceable with an AI opponent
-Implement an Expectimax or a Deep Learning AI (to be determined)
+Implement a minimax algorithm
 
 Low priority:
 Implement and create animations for card actions
