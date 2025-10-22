@@ -90,7 +90,7 @@ void KoiKoi_Display::initiateWindow() {
 	tableBoxWidth = (screenWidth * 4) / 5;
 	tableBoxHeight = (screenHeight - (playBoxHeight * 2) - (paddingTop * 6));
 
-	tableBoxX = paddingSide;
+	tableBoxX = cwidth + 2 * paddingSide;
 	tableBoxY = (screenHeight / 2) - paddingTop - cheight;
 
 	yesBoxX_ = (screenWidth / 2) - ((ywidth + swidth + nwidth) / 2) - appearenceoffsetX;
