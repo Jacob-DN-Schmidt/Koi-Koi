@@ -45,8 +45,8 @@
     <ClCompile Include="src\KoiKoi_Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="KoiKoi_Probability_Eval.cpp">
-      <Filter>Source Files\Probability Calc</Filter>
+    <ClCompile Include="src\KoiKoi_Probability_Eval.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -68,11 +68,11 @@
     <ClInclude Include="src\KoiKoi_Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="KoiKoi_AI_Player.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="src\KoiKoi_AI_Player.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="KoiKoi_Probability_Eval.h">
-      <Filter>Header Files\Probability Calc</Filter>
+    <ClInclude Include="src\KoiKoi_Probability_Eval.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -237,5 +237,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
