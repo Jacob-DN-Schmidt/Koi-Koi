@@ -2,7 +2,7 @@
 #include "boost/algorithm/string/constants.hpp"
 #include "boost/algorithm/string/split.hpp"
 #include "KoiKoi_Display.h"
-#include "raylib.h"
+#include <raylib.h>
 #include <array>
 #include <cstdlib>
 #include <deque>
@@ -23,29 +23,30 @@ Texture2D& KoiKoi_Display::getPreloadedCardTexture(std::string& imageID) {
 			return preloadedCardTextures[i].texture_;
 		}
 	}
+
 }
 
 
 //------------------------------------------------------------------------------------------------------
 // Card Highlight/Back Textures
 //------------------------------------------------------------------------------------------------------
-Texture2D KoiKoi_Display::highlightTexture;
+Texture2D KoiKoi_Display::highlightTexture_;
 Texture2D KoiKoi_Display::back_;
-
+Texture2D KoiKoi_Display::texture_error_;
 
 //------------------------------------------------------------------------------------------------------
 // Card Highlight/Back Operations
 //------------------------------------------------------------------------------------------------------
 void KoiKoi_Display::loadHighlight() {
-	highlightTexture = LoadTexture("Hanafuda Cards/highlight.png");
+	highlightTexture_ = LoadTexture("Hanafuda_Card_Data/highlight.png");
 };
 
 void KoiKoi_Display::unloadHighlight() {
-	UnloadTexture(highlightTexture);
+	UnloadTexture(highlightTexture_);
 };
 
 void KoiKoi_Display::loadBack() {
-	back_ = LoadTexture("Hanafuda Cards/backCard.png");
+	back_ = LoadTexture("Hanafuda_Card_Data/backCard.png");
 };
 
 void KoiKoi_Display::unloadBack() {
@@ -61,6 +62,8 @@ void KoiKoi_Display::initiateWindow() {
 	SetTargetFPS(30);
 
 	int monitor = GetCurrentMonitor();
+
+	// Setting dynamic screen varible values
 	screenWidth = (float) GetMonitorWidth(monitor);
 	screenHeight = (float) GetMonitorHeight(monitor);
 
@@ -99,13 +102,15 @@ void KoiKoi_Display::initiateWindow() {
 	noBoxX_ = yesBoxX_ + ywidth + swidth;
 	noBoxY_ = yesBoxY_;
 
+	// Preloading textures
 	loadHighlight();
 	loadBack();
+	texture_error_ = LoadTexture("missing_texture.png");
 
 	std::regex imagePattern(".*\\.png$", std::regex::ECMAScript);
 
-	FilePathList list = LoadDirectoryFiles("Hanafuda Cards");
-	for (int i = 0; i < list.count; i++) {
+	FilePathList list = LoadDirectoryFiles("Hanafuda_Card_Data");
+	for (unsigned int i = 0; i < list.count; i++) {
 		if (std::regex_match(GetFileName(list.paths[i]), imagePattern)) {
 			std::cout << "\nTexture " << i << ": ";
 			preloadedCardTextures.push_back(IDTexture(GetFileNameWithoutExt(list.paths[i])));
@@ -122,7 +127,7 @@ void KoiKoi_Display::initiateWindow() {
 // Drawing Operations
 //------------------------------------------------------------------------------------------------------
 void KoiKoi_Display::refreshDisplay() {
-
+	// Mouse input handling
 	if (canSelect_ && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) mousePress_ = true;
 
 	if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && mousePress_) {
@@ -130,14 +135,17 @@ void KoiKoi_Display::refreshDisplay() {
 		mousePress_ = false;
 	}
 
+	// Drawing
 	BeginDrawing();
 	ClearBackground(Color{ 255 , 240 , 200, 255 });
 
+	// Prompt to call Koi
 	if (callKoi_) {
-		DrawText("Call Koi?", (int) ((screenWidth / 2) - (ckwidth / 2)), (int) ((screenHeight / 2) - (theight + paddingTop)), 42, BLACK);
-		DrawText("Yes | No", (int) yesBoxX_, (int) yesBoxY_, 42, BLACK);
+		DrawTextEx(courier_new, "Call Koi?", Vector2((screenWidth / 2) - (ckwidth / 2), (screenHeight / 2) - (theight + paddingTop)), 42, 4, BLACK);
+		DrawTextEx(courier_new, "Yes | No", Vector2( yesBoxX_, yesBoxY_), 42, 4, BLACK);
 	}
 
+	// Draw message
 	if (!message_.empty()) {
 		DrawText(message_.c_str(), (int) (paddingSide), (int) (playBoxHeight + (theight / 2)), 42, BLACK);
 	}
@@ -146,6 +154,7 @@ void KoiKoi_Display::refreshDisplay() {
 	std::cout << "Opp played draw\n";
 #endif
 
+	// Draw opponent played cards
 	for (int i = 0; i < opponentPlayed_.size(); i++) {
 		opponentPlayed_[i].draw();
 	}
@@ -154,6 +163,7 @@ void KoiKoi_Display::refreshDisplay() {
 	std::cout << "Player played draw\n";
 #endif
 
+	// Draw player played cards
 	for (int i = 0; i < playerPlayed_.size(); i++) {
 		playerPlayed_[i].draw();
 	}
@@ -162,6 +172,7 @@ void KoiKoi_Display::refreshDisplay() {
 	std::cout << "Player hand draw\n";
 #endif
 
+	// Draw player hand cards that are not selected
 	for (int i = 0; i < playerHandSelectable_.size(); i++) {
 		if (!playerHandSelectable_[i].selected_) {
 			playerHandSelectable_[i].draw();
@@ -172,6 +183,7 @@ void KoiKoi_Display::refreshDisplay() {
 	std::cout << "Player hand selected draw\n";
 #endif
 
+	// Draw player hand cards that are selected
 	for (int i = 0; i < playerHandSelectable_.size(); i++) {
 		if (playerHandSelectable_[i].selected_) {
 			playerHandSelectable_[i].draw();
@@ -182,6 +194,7 @@ void KoiKoi_Display::refreshDisplay() {
 	std::cout << "Table draw\n";
 #endif
 
+	// Draw table cards that are not selected
 	for (int i = 0; i < tableSelectable_.size(); i++) {
 		if (!tableSelectable_[i].selected_) {
 			tableSelectable_[i].draw();
@@ -192,6 +205,7 @@ void KoiKoi_Display::refreshDisplay() {
 	std::cout << "Table selected draw\n";
 #endif
 
+	// Draw table cards that are selected
 	for (int i = 0; i < tableSelectable_.size(); i++) {
 		if (tableSelectable_[i].selected_) {
 			tableSelectable_[i].draw();
@@ -201,13 +215,11 @@ void KoiKoi_Display::refreshDisplay() {
 #ifdef CONSOL_DEBUG
 	std::cout << "Blanks draw\n";
 #endif
+
+	// Drawing opponent hand cards backside
 	if (blanksToDraw != 0) {
 		float currentDisplacement = opponentHandBoxX;
-		float dx = 0;
-
-		if (blanksToDraw - 1 != 0) {
-			dx = (handBoxWidth - cwidth) / (blanksToDraw - 1);
-		}
+		float dx = (handBoxWidth - cwidth) / (blanksToDraw - 1);
 
 		if (dx > cwidth + (paddingSide * 2)) {
 			dx = cwidth + (paddingSide * 2);
@@ -223,20 +235,23 @@ void KoiKoi_Display::refreshDisplay() {
 	std::cout << "Opp pts draw\n";
 #endif
 
+	// Drawing opponent points scored
 	std::string temp = "Opponent Points: " + std::to_string(oppPts_);
-	DrawText(temp.c_str(), (int) (tableBoxWidth + paddingSide), (int) (tableBoxY + cheight - paddingTop), 24, BLACK);
+	DrawTextEx(courier_new, temp.c_str(), Vector2(tableBoxWidth + paddingSide, tableBoxY + cheight - paddingTop), 24, 4, BLACK);
 
 #ifdef CONSOLE_DEBUG
 	std::cout << "Player pts draw\n";
 #endif
 
+	// Drawing player points scored
 	temp = "Player Points: " + std::to_string(playerPts_);
-	DrawText(temp.c_str(), (int) (tableBoxWidth + paddingSide), (int) (tableBoxY + cheight + (paddingTop * 3)), 24, BLACK);
+	DrawTextEx(courier_new, temp.c_str(), Vector2(tableBoxWidth + paddingSide, tableBoxY + cheight + (paddingTop * 3)), 24, 4, BLACK);
 
 	EndDrawing();
 
 	if (WindowShouldClose()) {
 		for (std::size_t i = 0; i < preloadedCardTextures.size(); i++) {
+			// Clear card textures from VRAM
 			UnloadTexture(preloadedCardTextures[i].texture_);
 		}
 		preloadedCardTextures.clear();
@@ -257,7 +272,7 @@ void KoiKoi_Display::onMouseClick(int x, int y) {
 			callKoiChoice_ = false;
 		}
 	}
-	else if (tableSelect_) {
+	else if (tableSelectMatch_) {
 		for (int i = 0; i < tableSelectable_.size(); i++) {
 #ifdef CONSOLE_DEBUG
 			std::cout << std::to_string(tableSelectable_.size()) << " " << std::to_string(i) << "\n";
@@ -267,7 +282,7 @@ void KoiKoi_Display::onMouseClick(int x, int y) {
 #ifdef CONSOLE_DEBUG
 				std::cout << "Select Success " << tableSelection_ << "\n";
 #endif // CONSOLE_DEBUG
-				tableSelect_ = false;
+				tableSelectMatch_ = false;
 				break;
 			}
 		}
@@ -275,9 +290,8 @@ void KoiKoi_Display::onMouseClick(int x, int y) {
 	else {
 		for (int i = 0; i < playerHandSelectable_.size(); i++) {
 			if (playerHandSelectable_[i].checkClick(x, y)) {
-				playerHandSelectable_[i].select();
 
-				if (playerHandSelectable_[i].selected_) {
+				if (playerHandSelectable_[i].select()) {
 					handSelection_ = i;
 				}
 				else {
@@ -291,14 +305,15 @@ void KoiKoi_Display::onMouseClick(int x, int y) {
 
 		for (int i = 0; i < tableSelectable_.size(); i++) {
 			if (tableSelectable_[i].checkClick(x, y)) {
-				if (tableSelectable_[i].selected_) {
-					deselectTable();
-				}
-				else {
-					deselectTable();
-					tableSelectable_[i].select();
+				if (tableSelectable_[i].select()) {
 					tableSelection_ = i;
 				}
+				else {
+					tableSelection_ = -1;
+				}
+			}
+			else {
+				tableSelectable_[i].deselect();
 			}
 		}
 	}
@@ -323,7 +338,7 @@ std::array<int, 2> KoiKoi_Display::waitForSelection(const std::string& gamestate
 
 int KoiKoi_Display::waitForTableSelection(int tableMatch1, int tableMatch2, int handSelection, std::string message) {
 	canSelect_ = true;
-	tableSelect_ = true;
+	tableSelectMatch_ = true;
 	message_ = message;
 	selectTableAt(tableMatch1);
 	selectTableAt(tableMatch2);
@@ -332,7 +347,7 @@ int KoiKoi_Display::waitForTableSelection(int tableMatch1, int tableMatch2, int 
 		playerHandSelectable_[handSelection].selected_ = true;
 	}
 
-	while (tableSelect_) {
+	while (tableSelectMatch_) {
 		refreshDisplay();
 	}
 
@@ -346,11 +361,8 @@ int KoiKoi_Display::waitForTableSelection(int tableMatch1, int tableMatch2, int 
 
 void KoiKoi_Display::pause(const std::string& gamestate) {
 	updateGamestate(gamestate);
-
-	while (!IsKeyPressed(KEY_SPACE) && !IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-		refreshDisplay();
-	}
-
+	while (!IsKeyPressed(KEY_SPACE) && !IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) refreshDisplay();
+	
 }
 
 bool KoiKoi_Display::promptCallKoi(const std::string& gamestate) {
@@ -367,7 +379,7 @@ bool KoiKoi_Display::promptCallKoi(const std::string& gamestate) {
 
 int KoiKoi_Display::promptMatch(const std::string& card, int firstMatch, int secondMatch) {
 	canSelect_ = true;
-	tableSelect_ = true;
+	tableSelectMatch_ = true;
 
 	if (card.front() == 'J') {
 		cardToMatch_ = card.substr(1, card.size());
