@@ -32,20 +32,20 @@ private:
 
 	Hanafuda_Deck deck_;
 	std::deque<Hanafuda_Card*> table_;
-	
+
 	KoiKoi_Display display_;
 
 #ifdef CONSOLE_PLAY
 	void pauseToSwap() {
 		std::system("CLS");
 		std::cout << "Swap player and press enter to continue";
-		(void) getchar();
+		(void)getchar();
 		std::system("CLS");
 	};
 
 	void pause() {
 		std::cout << "Press enter to continue\n";
-		(void) getchar();
+		(void)getchar();
 	};
 
 	void refresh() {
