@@ -11,7 +11,7 @@
 
 void Hanafuda_Deck::initializeFromFile() {
 	std::fstream CardInfo;
-	CardInfo.open("Hanafuda Cards/CardInfo.txt");
+	CardInfo.open("Hanafuda_Card_Data/CardInfo.txt");
 	std::regex parseMultKasu("^/(\\d+);(\\d+)$", std::regex::ECMAScript);
 	std::string current;
 
