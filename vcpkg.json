@@ -1,7 +1,0 @@
-{
-  "dependencies": [
-    "boost",
-    "fmt",
-    "raylib"
-  ]
-}
