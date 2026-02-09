@@ -1,9 +1,10 @@
-//#define CONSOLE_DEBUG
+﻿//#define CONSOLE_DEBUG
 //#define CONSOLE_PLAY
 
 #include "KoiKoi_Game.h"
 #include "KoiKoi_Probability_Eval.h"
 #include <climits>
+#include <ctime>
 #include <fstream>
 #include <iosfwd>
 #include <iostream>
@@ -14,10 +15,7 @@
 // Program main entry point
 //------------------------------------------------------------------------------------
 int main(void) {
-	std::cout << boost::math::factorial<double>(4) << "\n";
-	std::cout << KoiKoi_Probablility_Eval::nChoosek(10,4);
-	return 0;
-
+	
 	unsigned int seed = UINT_MAX & time(nullptr);
 	std::ofstream seedFile;
 	seedFile.open("bin/seed_log.txt", std::ios::app);
@@ -25,10 +23,16 @@ int main(void) {
 		seedFile << seed << "\n";
 		seedFile.close();
 	}
+	else {
+		std::cout << "Failed to open seed_log.txt" << "\n";
+	}
 	srand(seed);
+	std::cout << "Start Game\n";
+	std::cout << "test\n";
+
 	KoiKoi_Game game;
 	game.startGame();
-
+	std::cout << "Game Finished\n";
 	return 0;
 }
 

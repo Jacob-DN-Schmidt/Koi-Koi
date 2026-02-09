@@ -79,8 +79,10 @@ void KoiKoi_Game::startRound() {
 			}
 		}
 	}
-	display_.pause(this->gamestate());
-	if (end) return;
+	if (end) { 
+		display_.pause(this->gamestate());
+		return; 
+	}
 
 
 	// Player1 round points, Player2 round points

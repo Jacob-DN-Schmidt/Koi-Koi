@@ -1,7 +1,7 @@
 {
   "dependencies": [
-    "boost",
-    "fmt",
+    "boost-algorithm",
+    "boost-math",
     "raylib"
   ]
 }

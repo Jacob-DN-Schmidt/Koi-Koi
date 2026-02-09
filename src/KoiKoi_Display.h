@@ -5,7 +5,7 @@
 #include "boost/algorithm/string/constants.hpp"
 #include "boost/algorithm/string/split.hpp"
 #include "boost/serialization/strong_typedef.hpp"
-#include "raylib.h"
+#include <raylib.h>
 #include <array>
 #include <deque>
 #include <string>
@@ -46,7 +46,7 @@ private:
 		std::string imageID_;
 		Texture2D texture_;
 
-		IDTexture(std::string imageID) : imageID_(imageID), texture_() { texture_ = LoadTexture(("Hanafuda Cards/" + imageID_ + ".png").c_str()); };
+		IDTexture(std::string imageID) : imageID_(imageID), texture_() { texture_ = LoadTexture(("Hanafuda_Card_Data/" + imageID_ + ".png").c_str()); };
 	};
 
 	std::vector<IDTexture> preloadedCardTextures;
@@ -57,8 +57,9 @@ private:
 	// Card Highlight/Back Textures
 	//------------------------------------------------------------------------------------------------------
 
-	static Texture2D highlightTexture;
+	static Texture2D highlightTexture_;
 	static Texture2D back_;
+	static Texture2D texture_error_;
 
 
 	//------------------------------------------------------------------------------------------------------
@@ -91,30 +92,10 @@ private:
 
 		// Constructor: imgID(texture filename), x(left coord), y(top coord)
 		Hanafuda_Card_Texture(std::string imgID, float x, float y, Texture2D& texture) : imgID_("Hanafuda Cards/" + imgID + ".png"), x_(x), y_(y), texture_(texture) {};
-		//~Hanafuda_Card_Texture() {
-		//	this->unload();
-		//};
-		//// Loads card texture into vram; should only be called after display initiation
-		//void load() {
-		//	texture_ = LoadTexture(imgID_.c_str());
-		//};
-		//// Unloads card texture 
-		//void unload() const {
-		//	UnloadTexture(texture_);
-		//};
 		// Draws card texture; should only be called while in drawing mode loop
 		virtual void draw() const {
-			DrawTexture(texture_, (int) x_, (int) y_, WHITE);
+			DrawTexture(texture_, (int)x_, (int)y_, WHITE);
 		};
-
-		// Unused Methods
-		//int getWidth() const {
-		//	return texture_.width;
-		//};
-
-		//int getHeight() const {
-		//	return texture_.height;
-		//};
 	};
 
 	// Nested child class
@@ -130,13 +111,14 @@ private:
 
 		void draw() const override {
 			if (selected_) {
-				DrawTexture(highlightTexture, (int) (x_ - 5), (int) (y_ - 5), WHITE);
+				DrawTexture(highlightTexture_, (int)(x_ - 5), (int)(y_ - 5), WHITE);
 			}
-			DrawTexture(texture_, (int) x_, (int) y_, WHITE);
+			DrawTexture(texture_, (int)x_, (int)y_, WHITE);
 		};
 
-		void select() {
+		bool select() {
 			selected_ = !selected_;
+			return selected_;
 		};
 
 		bool checkClick(int x, int y) {
@@ -155,7 +137,7 @@ private:
 
 	bool canSelect_ = false;
 	bool callKoi_ = false;
-	bool tableSelect_ = false;
+	bool tableSelectMatch_ = false;
 
 
 	//------------------------------------------------------------------------------------------------------
@@ -171,6 +153,7 @@ private:
 	//------------------------------------------------------------------------------------------------------
 	// Display Aspects
 	//------------------------------------------------------------------------------------------------------
+	Font courier_new = LoadFontEx("cour.ttf", 12, NULL, 0);
 
 	std::string cardToMatch_ = "";
 	std::string message_ = "";
@@ -188,9 +171,9 @@ private:
 	int playerPts_ = 0;
 	int oppPts_ = 0;
 
-// End private ========================================================================================== //
+	// End private ========================================================================================== //
 
-public: 
+public:
 
 	//------------------------------------------------------------------------------------------------------
 	// Window/Aspect dimensions and drawing/bouding coordinates
@@ -243,7 +226,7 @@ public:
 	//------------------------------------------------------------------------------------------------------
 	// Window Operations
 	//------------------------------------------------------------------------------------------------------
-	
+
 	// Sets dimensions and coordinates to fit in fullscreen mode
 	void initiateWindow();
 	// Call when Display is meant to close; clears all textures out of vram
@@ -258,7 +241,7 @@ public:
 	//------------------------------------------------------------------------------------------------------
 	// Drawing Operations
 	//------------------------------------------------------------------------------------------------------
-	
+
 	// Draws game aspects that have been parsed and loaded
 	// Mouse interaction flag - canSelect_
 	void refreshDisplay();
@@ -267,7 +250,7 @@ public:
 	//------------------------------------------------------------------------------------------------------
 	// Interaction Operations
 	//------------------------------------------------------------------------------------------------------
-	
+
 	// Handles mouse inputs
 	// Operation flags - callKoi_, tableSelect_
 	void onMouseClick(int x, int y);
@@ -338,26 +321,6 @@ public:
 		playerPts_ = stoi(collections[6]);
 	};
 
-	//// Loads all card textures in aspect into VRAM
-	//void loadTextures(std::vector<Hanafuda_Card_Texture>& aspect) {
-	//	for (int i = 0; i < aspect.size(); i++) {
-	//		aspect[i].load();
-	//	}
-	//}
-	//// Loads all card textures in aspect into VRAM
-	//void loadTextures(std::vector<Hanafuda_Card_Selectable_Texture>& aspect) {
-	//	for (int i = 0; i < aspect.size(); i++) {
-	//		aspect[i].load();
-	//	}
-	//}
-	//// Loads all necessary card textures
-	//void loadGamestateAspect() {
-	//	loadTextures(opponentPlayed_);
-	//	loadTextures(playerPlayed_);
-	//	loadTextures(playerHandSelectable_);
-	//	loadTextures(tableSelectable_);
-	//}
-
 	// Sets card at index in table selected attribute to true
 	void selectTableAt(int index) {
 		tableSelectable_[index].selected_ = true;
@@ -382,15 +345,6 @@ public:
 	};
 
 	// Clears all card textures in aspect
-	//void clearTextures(std::vector<Hanafuda_Card_Texture>& aspect) {
-	//	for (int i = 0; i < aspect.size(); i++) aspect[i].unload();
-	//	aspect.clear();
-	//}
-	//// Clears all card textures in aspect
-	//void clearTextures(std::vector<Hanafuda_Card_Selectable_Texture>& aspect) {
-	//	for (int i = 0; i < aspect.size(); i++) aspect[i].unload();
-	//	aspect.clear();
-	//}
 	void clearAllTextures() {
 		opponentPlayed_.clear();
 		playerPlayed_.clear();
