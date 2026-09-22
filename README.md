@@ -1,8 +1,10 @@
 # About Koi-Koi
 This is an implementation of the game [Koi-koi](https://en.wikipedia.org/wiki/Koi-Koi), a Japanese card game that is played with hanafuda cards. It is a personal project of mine with the goal to eventually implement an AI opponent that you can play against. Currently, I am working on finishing up the gui elements, cleaning up some of the code, and reformatting files. The next steps for this project would be to decide what form of AI I would like to use and implementing an interface between the game logic and AI.
 
-**[Update 2025-9-25]** After consulting with one of my professors, I have decided to use a minimax algorithm for the AI's decision making. In order to make this change, I will alter functions that take in a Hanafuda card or multiple Hanafuda Cards to work off of their string representation. More details about that can be found [here](https://github.com/Jacob-DN-Schmidt/Koi-Koi/blob/master/bin/KoiKoi_Game_Image_Formatting.txt)
+### **[Update 2025-9-25]** 
+After consulting with one of my professors, I have decided to use a minimax algorithm for the AI's decision making. In order to make this change, I will alter functions that take in a Hanafuda card or multiple Hanafuda Cards to work off of their string representation. More details about that can be found [here](https://github.com/Jacob-DN-Schmidt/Koi-Koi/blob/master/bin/KoiKoi_Game_Image_Formatting.txt)
 
+## Attributions, Copyright, and Licensing
 Makes use of [boost v1.87.0](https://www.boost.org/) and [raylib v5.5](https://github.com/raysan5/raylib) libraries for convienience methods and graphics respectively.
 
 The face-side textures were converted from svgs to pngs by me. The original files where created by Louie Mantia,
