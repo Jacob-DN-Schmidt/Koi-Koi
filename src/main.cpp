@@ -2,7 +2,6 @@
 //#define CONSOLE_PLAY
 
 #include "KoiKoi_Game.h"
-#include "KoiKoi_Probability_Eval.h"
 #include <climits>
 #include <ctime>
 #include <fstream>
