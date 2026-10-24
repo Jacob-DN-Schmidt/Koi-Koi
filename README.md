@@ -5,7 +5,7 @@ This is an implementation of the game [Koi-koi](https://en.wikipedia.org/wiki/Ko
 After consulting with one of my professors, I have decided to use a minimax algorithm for the AI's decision making. In order to make this change, I will alter functions that take in a Hanafuda card or multiple Hanafuda Cards to work off of their string representation. More details about that can be found [here](https://github.com/Jacob-DN-Schmidt/Koi-Koi/blob/master/bin/KoiKoi_Game_Image_Formatting.txt)
 
 ## Attributions, Copyright, and Licensing
-Makes use of [boost v1.87.0](https://www.boost.org/) and [raylib v5.5](https://github.com/raysan5/raylib) libraries for convienience methods and graphics respectively.
+Makes use of [boost](https://www.boost.org/) and [raylib](https://github.com/raysan5/raylib) libraries for convienience methods and graphics respectively.
 
 The face-side textures were converted from svgs to pngs by me. The original files where created by Louie Mantia,
 which can be found [here](https://commons.wikimedia.org/wiki/Category:SVG_Hanafuda_with_traditional_colors_(black_border))
