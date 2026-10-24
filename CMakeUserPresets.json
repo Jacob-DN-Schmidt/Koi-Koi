@@ -5,7 +5,7 @@
       "name": "default",
       "inherits": "vcpkg",
       "environment": {
-        "VCPKG_ROOT": "C:/ProgramData/vcpkg"
+        "VCPKG_ROOT": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\vcpkg"
       }
     }
   ]

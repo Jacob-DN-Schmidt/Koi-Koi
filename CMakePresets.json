@@ -3,7 +3,8 @@
   "configurePresets": [
     {
       "name": "vcpkg",
-      "architecture": { 
+      "hidden": true,
+      "architecture": {
         "value": "x64",
         "strategy": "external"
       },
@@ -12,8 +13,7 @@
       "cacheVariables": {
         "CMAKE_C_COMPILER": "cl.exe",
         "CMAKE_CXX_COMPILER": "cl.exe",
-        "CMAKE_INSTALL_RPATH_USE_LINK_PATH": "ON",
-        "CMAKE_TOOLCHAIN_FILE": "C:/ProgramData/vcpkg/scripts/buildsystems/vcpkg.cmake"
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
       }
     },
     {

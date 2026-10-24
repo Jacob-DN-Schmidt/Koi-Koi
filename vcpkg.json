@@ -1,7 +1,9 @@
 {
   "dependencies": [
     "boost-algorithm",
+    "boost-assign",
     "boost-math",
-    "raylib"
+    "raylib",
+    "boost-serialization"
   ]
 }

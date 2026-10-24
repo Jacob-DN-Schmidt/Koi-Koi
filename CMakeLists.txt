@@ -1,7 +1,7 @@
 ﻿# CMakeList.txt : CMake project for KoiKoi_v2 include source and define
 # project specific logic here.
 #
-cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required (VERSION 3.12)
 set(CMAKE_VERBOSE_MAKEFILE on)
 cmake_policy(SET CMP0167 NEW)
 
@@ -14,7 +14,7 @@ endif()
 project ("KoiKoi_v2")
 
 # Add source to this project's executable.
-add_executable (KoiKoi_v2 "src/main.cpp"  "src/Hanafuda_Card.h" "src/Hanafuda_Deck.h" "src/KoiKoi_AI_Player.h" "src/KoiKoi_Display.h" "src/KoiKoi_Game.h" "src/KoiKoi_Game_Handler.h" "src/KoiKoi_Player.h" "src/KoiKoi_Probability_Eval.h" "src/Hanafuda_Card.cpp" "src/Hanafuda_Deck.cpp" "src/KoiKoi_Display.cpp" "src/KoiKoi_Game.cpp" "src/KoiKoi_Game_Handler.cpp" "src/KoiKoi_Player.cpp" "src/KoiKoi_Probability_Eval.cpp")
+add_executable (KoiKoi_v2 "src/main.cpp"  "src/Hanafuda_Card.h" "src/Hanafuda_Deck.h" "src/KoiKoi_AI_Player.h" "src/KoiKoi_Display.h" "src/KoiKoi_Game.h" "src/KoiKoi_Game_Handler.h" "src/KoiKoi_Player.h" "src/Hanafuda_Card.cpp" "src/Hanafuda_Deck.cpp" "src/KoiKoi_Display.cpp" "src/KoiKoi_Game.cpp" "src/KoiKoi_Game_Handler.cpp" "src/KoiKoi_Player.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET KoiKoi_v2 PROPERTY CXX_STANDARD 20)
@@ -85,8 +85,8 @@ configure_file("bin/seed_log.txt" "${CMAKE_CURRENT_BINARY_DIR}/bin/seed_log.txt"
 
 # Finding vcpkg packages
 find_package(raylib REQUIRED)
-find_package(Boost REQUIRED COMPONENTS math algorithm)
+find_package(Boost REQUIRED COMPONENTS math algorithm assign serialization)
 
 # Linking dependancies
 target_link_libraries(KoiKoi_v2 PRIVATE raylib)
-target_link_libraries(KoiKoi_v2 PRIVATE Boost::math Boost::algorithm)
+target_link_libraries(KoiKoi_v2 PRIVATE Boost::math Boost::algorithm Boost::assign Boost::serialization)
