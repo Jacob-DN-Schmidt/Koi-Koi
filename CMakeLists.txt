@@ -78,8 +78,12 @@ configure_file("${HANAFUDA_CARD_PATH}/M11_S0_A.png" "${CMAKE_CURRENT_BINARY_DIR}
 configure_file("${HANAFUDA_CARD_PATH}/M11_S0_B.png" "${CMAKE_CURRENT_BINARY_DIR}/Hanafuda_Card_Data/M11_S0_B.png" COPYONLY)
 configure_file("${HANAFUDA_CARD_PATH}/M11_S0_C.png" "${CMAKE_CURRENT_BINARY_DIR}/Hanafuda_Card_Data/M11_S0_C.png" COPYONLY)
 configure_file("${HANAFUDA_CARD_PATH}/chinese_phoenix.png" "${CMAKE_CURRENT_BINARY_DIR}/Hanafuda_Card_Data/chinese_phoenix.png" COPYONLY)
+configure_file("${HANAFUDA_CARD_PATH}/missing_texture.png" "${CMAKE_CURRENT_BINARY_DIR}/Hanafuda_Card_Data/missing_texture.png" COPYONLY)
 
-configure_file("src/missing_texture.png" "${CMAKE_CURRENT_BINARY_DIR}/missing_texture.png" COPYONLY)
+# Add fonts to build dir
+find_path(FONTS_PATH PATHS "fonts" NAMES ".fonts_root")
+configure_file("${FONTS_PATH}/cour.ttf" "${CMAKE_CURRENT_BINARY_DIR}/fonts/cour.ttf" COPYONLY)
+
 # Add seed_log to build dir for debugging purposes
 configure_file("bin/seed_log.txt" "${CMAKE_CURRENT_BINARY_DIR}/bin/seed_log.txt" APPEND)
 
