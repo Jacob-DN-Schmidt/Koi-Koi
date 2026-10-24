@@ -153,7 +153,7 @@ private:
 	//------------------------------------------------------------------------------------------------------
 	// Display Aspects
 	//------------------------------------------------------------------------------------------------------
-	Font courier_new = LoadFontEx("cour.ttf", 12, NULL, 0);
+	Font courier_new = LoadFontEx("fonts/cour.ttf", 24, NULL, 0);
 
 	std::string cardToMatch_ = "";
 	std::string message_ = "";

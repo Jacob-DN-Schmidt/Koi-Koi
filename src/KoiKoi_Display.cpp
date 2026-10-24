@@ -287,8 +287,23 @@ void KoiKoi_Display::onMouseClick(int x, int y) {
 			}
 		}
 	}
-	else {
+	else if (x >= playerHandBoxX && x < playerHandBoxX + handBoxWidth && y >= playerHandBoxY && y < playerHandBoxY + handBoxWidth) {
+		bool selection_made = false;
 		for (int i = 0; i < playerHandSelectable_.size(); i++) {
+			if (playerHandSelectable_[i].checkClick(x, y) && playerHandSelectable_[i].select()) {
+				handSelection_ = i;
+				selection_made = true;
+			}
+			else {
+				playerHandSelectable_[i].deselect();
+			}
+		}
+		if (!selection_made) {
+			handSelection_ = -1;
+		}
+	}
+	else {
+		/*for (int i = 0; i < playerHandSelectable_.size(); i++) {
 			if (playerHandSelectable_[i].checkClick(x, y)) {
 
 				if (playerHandSelectable_[i].select()) {
@@ -301,20 +316,20 @@ void KoiKoi_Display::onMouseClick(int x, int y) {
 			else {
 				playerHandSelectable_[i].deselect();
 			}
-		}
+		}*/
 
+		bool selection_made = false;
 		for (int i = 0; i < tableSelectable_.size(); i++) {
-			if (tableSelectable_[i].checkClick(x, y)) {
-				if (tableSelectable_[i].select()) {
-					tableSelection_ = i;
-				}
-				else {
-					tableSelection_ = -1;
-				}
+			if (tableSelectable_[i].checkClick(x, y) && tableSelectable_[i].select()) {
+				tableSelection_ = i;
+				selection_made = true;
 			}
 			else {
 				tableSelectable_[i].deselect();
 			}
+		}
+		if (!selection_made) {
+			tableSelection_ = -1;
 		}
 	}
 
